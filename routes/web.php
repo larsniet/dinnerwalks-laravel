@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    // Route::controller('dashboard', [DashboardController::class])->name('dashboard');
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::view('forms', 'forms')->name('forms');
     Route::view('cards', 'cards')->name('cards');

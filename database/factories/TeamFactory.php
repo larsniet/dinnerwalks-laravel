@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Hash;
 
-class UserFactory extends Factory
+class TeamFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Team::class;
 
     /**
      * Define the model's default state.
@@ -24,11 +24,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => "Lars vd Niet",
-            'email' => "lvdnbusiness@gmail.com",
-            'email_verified_at' => now(),
-            'password' => Hash::make("16021602"), // password
-            'remember_token' => Str::random(10),
+            "user_id" => 1,
+            "name" => "admin",
+            "personal_team" => 1
         ];
     }
 }
