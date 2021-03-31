@@ -21,4 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('customers', [ApiController::class, 'getCustomers']);
+Route::get('walks', [ApiController::class, 'getWalks']);
+Route::get('horeca', [ApiController::class, 'getHoreca']);
+
+Route::post('contactForm', [ApiController::class, 'sendContactForm']);
 

@@ -10,6 +10,7 @@ class DisplayCustomers extends Component
 {
     public function render()
     {
+        // dd(Boeking::all());
         return view('livewire.display-customers', [
             'customers' => Customer::all(),
             'boekingen' => Boeking::all()

@@ -21,15 +21,15 @@
         </div>
 
         @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-        <x-section-border />
+            <x-section-border />
 
-        <div class="mt-10 sm:mt-0">
-            <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-                {{ __('Two Factor Authentication') }}
-            </h4>
+            <div class="mt-10 sm:mt-0">
+                <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+                    {{ __('Two Factor Authentication') }}
+                </h4>
 
-            @livewire('profile.two-factor-authentication-form')
-        </div>
+                @livewire('profile.two-factor-authentication-form')
+            </div>
         @endif
 
         <x-section-border />

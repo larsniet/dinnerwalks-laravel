@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Customer;
+use App\Models\Walk;
 
 class Boeking extends Model
 {
@@ -30,6 +31,11 @@ class Boeking extends Model
     public function customer() 
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function walk()
+    {
+        return $this->belongsTo(Walk::class);
     }
 
 }

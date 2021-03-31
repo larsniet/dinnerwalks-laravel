@@ -17,10 +17,12 @@ class CreateBoekingenTable extends Migration
             $table->id();
             $table->dateTime("datum", $precision = 0);
             $table->string("kortingscode");
-            $table->string("locatie");
-            $table->float("personen");
+            $table->integer("personen");
             $table->float("bedrag_betaald");
             
+            $table->unsignedBigInteger("walk_id");
+            $table->foreign('walk_id')->references('id')->on('walks');
+
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
             

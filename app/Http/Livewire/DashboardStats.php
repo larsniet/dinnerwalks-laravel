@@ -15,9 +15,12 @@ class DashboardStats extends Component
         foreach ($boekingen as $key => $boeking) {
             $omzet += $boeking->bedrag_betaald;
         }
+        $transacties = $boekingen->count();
+
         return view('livewire.dashboard-stats', [
             'customers' => Customer::all(),
-            'omzet' => $omzet
+            'omzet' => $omzet,
+            'transacties' => $transacties
         ]);
     }
 }

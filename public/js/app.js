@@ -21349,8 +21349,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/larsvanderniet/Documents/Werk/larawind/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/larsvanderniet/Documents/Werk/larawind/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /var/www/dinnerwalks-laravel/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/dinnerwalks-laravel/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

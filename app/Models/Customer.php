@@ -28,7 +28,7 @@ class Customer extends Model
 
     public function boeking() 
     {
-        return $this->hasMany(Boeking::class, 'customer_id');
+        return $this->hasOne(Boeking::class, 'customer_id');
     }   
 
 }

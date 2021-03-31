@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Boeking;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Customer;
+use App\Models\Walk;
 
 class BoekingFactory extends Factory
 {
@@ -15,6 +16,16 @@ class BoekingFactory extends Factory
      */
     protected $model = Boeking::class;
 
+
+    public function customerid()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'customer_id' => $attributes,
+            ];
+        });
+    }
+
     /**
      * Define the model's default state.
      *
@@ -22,13 +33,25 @@ class BoekingFactory extends Factory
      */
     public function definition()
     {
+        $personen = $this->faker->numberBetween($min = 1, $max = 2);
+        if ($personen === 2) {
+            $bedrag = 7;
+        } else {
+            $bedrag = 3.50;
+        }
+
+        $walk = Walk::all()->random();
+        $walk->aantal_geboekt += 1;
+        $walk->omzet += $bedrag;
+        $walk->save();
+
         return [
             "datum" => $this->faker->dateTime($max = 'now', $timezone = null),
             "kortingscode" => "Bruinvis-1",
-            "locatie" => $this->faker->randomElement($array = array("noordwijk", "katwijk")),
-            "personen" => 2,
-            "bedrag_betaald" => 3.50,
-            "customer_id" => Customer::all()->random()->id,
+            "personen" => $personen,
+            "bedrag_betaald" => $bedrag,
+            "walk_id" => $walk->id,
+            "customer_id" => null
         ];
     }
 }
