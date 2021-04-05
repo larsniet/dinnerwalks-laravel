@@ -46,7 +46,7 @@ class AddHoreca extends Component
         $this->validate();
         $faker = Faker::create();
 
-        $logo = $this->logo->store('images');
+        $logo = $this->logo->store('public/horeca_images');
         $walk = Walk::where("locatie", $this->walk)->first();
 
         $password = $faker->password();
@@ -62,7 +62,7 @@ class AddHoreca extends Component
         $horeca = Horeca::create([
             'naam' => $this->naam,
             'email' => $this->email,
-            'logo' => $logo,
+            'logo' => "storage/".trim($logo, "public/"),
             'adres' => $this->adres,
             'website' => $this->website,
             'instagram' => $this->instagram,

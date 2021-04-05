@@ -18,7 +18,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Beach",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/beach.jpg",
+            'logo' => "storage/horeca_images/beach.jpg",
             "adres" => "Zeereep 102",
             'website' => 'https://beachnoordwijk.nl/',
             'instagram' => 'https://www.instagram.com/beachnoordwijk/',
@@ -29,7 +29,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Beachclub C",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/beachclubc.png",
+            'logo' => "storage/horeca_images/beachclubc.png",
             "adres" => "Kon. Astrid Boulevard 104",
             'website' => 'https://beachclubcnoordwijk.nl/',
             'instagram' => 'https://www.instagram.com/beachclub.c.noordwijk/',
@@ -40,7 +40,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Open Doors",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/opendoors.jpg",
+            'logo' => "storage/horeca_images/opendoors.jpg",
             "adres" => "De Grent 34",
             'website' => 'https://open-doors.nl/',
             'instagram' => 'https://www.instagram.com/opendoors_noordwijk/',
@@ -51,7 +51,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Pannekoekenhuisje",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/pannekoekenhuisje.png",
+            'logo' => "storage/horeca_images/pannekoekenhuisje.png",
             "adres" => "Kon. Wilhelmina Boulevard 15A-B",
             'website' => 'https://www.hetpannekoekenhuisje.nl/',
             'instagram' => 'https://www.instagram.com/pannekoekenhuisjenoordwijk/',
@@ -62,7 +62,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Alexander Beach Club",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/alexander.png",
+            'logo' => "storage/horeca_images/alexander.png",
             "adres" => "Koningin Wilhelmina Boulevard afrit 10",
             'website' => 'https://www.alexanderbeach.nl/',
             'instagram' => 'https://www.instagram.com/alexanderbeachclubnoordwijk/',
@@ -73,7 +73,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Palace Hotel",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/palace.png",
+            'logo' => "storage/horeca_images/palace.png",
             "adres" => "Pickeplein 8",
             'website' => 'https://palacehotel.nl/',
             'instagram' => 'https://www.instagram.com/hotelnoordwijk/',
@@ -84,7 +84,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Nani",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/nani.png",
+            'logo' => "storage/horeca_images/nani.png",
             "adres" => "Bomstraat 23",
             'website' => 'https://naninoordwijk.sitedish.shop/',
             'instagram' => 'https://www.instagram.com/naninoordwijk.nl/',
@@ -95,7 +95,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Paal 14",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/paal14.png",
+            'logo' => "storage/horeca_images/paal14.png",
             "adres" => "Boulevard Zeezijde 7",
             'website' => 'https://paal14.nl/',
             'instagram' => 'https://www.instagram.com/strandpaviljoenpaal14/',
@@ -106,7 +106,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "SandCbar",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/sandcbar.png",
+            'logo' => "storage/horeca_images/sandcbar.png",
             "adres" => "Boulevard Zeezijde 43",
             'website' => 'https://www.sandcbar.nl/',
             'instagram' => 'https://www.instagram.com/sandcbar_katwijk/',
@@ -117,7 +117,7 @@ class HorecaSeeder extends Seeder
         DB::table('horecas')->insert([
             'naam' => "Hotel Steeds aan zee",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "images/steedsaanzee.png",
+            'logo' => "storage/horeca_images/steedsaanzee.png",
             "adres" => "Kon. Wilhelminastraat 14",
             'website' => 'http://steedsaanzee.nl/grand-cafe-restraurant-de-koningin-katwijk/',
             'instagram' => 'https://www.instagram.com/bar70.katwijk/',

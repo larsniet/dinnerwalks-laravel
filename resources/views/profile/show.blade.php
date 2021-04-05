@@ -5,7 +5,7 @@
         </h2>
 
         <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-            {{ __('Profiel informatie') }}
+            {{ __('Profiel Informatie') }}
         </h4>
 
         @livewire('profile.update-profile-information-form')
@@ -14,7 +14,7 @@
 
         <div class="mt-10 sm:mt-0">
             <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-                {{ __('Wachtwoord veranderen') }}
+                {{ __('Wachtwoord Veranderen') }}
             </h4>
 
             @livewire('profile.update-password-form')
