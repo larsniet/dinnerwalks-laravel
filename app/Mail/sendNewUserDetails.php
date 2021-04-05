@@ -7,24 +7,28 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class sendContactForm extends Mailable
+class sendNewUserDetails extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $userName;
     public $naam;
     public $email;
-    public $bericht;
+    public $locatie;
+    public $password;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($naam, $email, $bericht)
+    public function __construct($userName, $naam, $email, $locatie, $password)
     {
+        $this->userName = $userName;
         $this->naam = $naam;
         $this->email = $email;
-        $this->bericht = $bericht;
+        $this->locatie = $locatie;
+        $this->password = $password;
     }
 
     /**
@@ -34,6 +38,6 @@ class sendContactForm extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contactForm')->subject("Contactformulier is ingevuld");
+        return $this->view('emails.userDetails')->subject("U bent aangemeld bij Dinnerwalks");
     }
 }

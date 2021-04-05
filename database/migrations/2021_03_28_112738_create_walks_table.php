@@ -17,6 +17,10 @@ class CreateWalksTable extends Migration
             $table->id();
             $table->string("locatie")->unique();
             $table->string("beschrijving");
+            $table->float("prijs");
+
+            $table->integer("max_aantal_personen");
+            $table->date("max_boekings_datum");
 
             $table->integer("aantal_geboekt")->default(0);
             $table->float("omzet")->default(0);

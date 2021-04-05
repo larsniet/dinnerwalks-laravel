@@ -1,26 +1,28 @@
 <x-action-section>
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-900 dark:text-gray-300">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+            {{ __('Zodra je je account verwijderd, verwijder je ook alle gegevens van de door jou toegevoegde onderneming. Dit is permanent en kan niet teruggedraaid worden tenzij je weer contact met ons opneemt.') }}
         </div>
 
         <div class="mt-5">
             <x-danger-button wire:click="confirmUserDeletion" wire:loading.attr="disabled">
-                {{ __('Delete Account') }}
+                {{ __('Verwijder account') }}
             </x-danger-button>
         </div>
 
         <!-- Delete User Confirmation Modal -->
         <x-dialog-modal wire:model="confirmingUserDeletion">
             <x-slot name="title">
-                {{ __('Delete Account') }}
+                {{ __('Verwijder Account') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                {{ __('Weet je zeker dat je je account wil verwijderen? Jouw accountgegevens en jouw horecaonderneming worden permanent verwijderd. Vul je wachtwoord in om door te gaan.') }}
 
-                <div class="mt-4" x-data="{}" x-on:confirming-delete-user.window="setTimeout(() => $refs.password.focus(), 250)">
-                    <x-input type="password" class="block w-3/4 mt-1" placeholder="Password" x-ref="password" wire:model.defer="password" wire:keydown.enter="deleteUser" />
+                <div class="mt-4" x-data="{}"
+                    x-on:confirming-delete-user.window="setTimeout(() => $refs.password.focus(), 250)">
+                    <x-input type="password" class="block w-3/4 mt-1" placeholder="Wachtwoord" x-ref="password"
+                        wire:model.defer="password" wire:keydown.enter="deleteUser" />
 
                     <x-input-error for="password" class="mt-2" />
                 </div>
@@ -28,11 +30,11 @@
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingUserDeletion')" wire:loading.attr="disabled">
-                    {{ __('Nevermind') }}
+                    {{ __('Oh, dat wil ik niet!') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ml-2" wire:click="deleteUser" wire:loading.attr="disabled">
-                    {{ __('Delete Account') }}
+                    {{ __('Verwijder account') }}
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>

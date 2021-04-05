@@ -31,4 +31,19 @@ class ApiController extends Controller
         Mail::to('info@dinnerwalks.nl')->send(new sendContactForm($request->naam, $request->email, $request->bericht));
         return response()->json(200);
     }
+
+    public function postPaymentMethods(Request $request)
+    {
+        $customer = $request->customer();
+        $paymentMethodID = $request->get('payment_method');
+    
+        if( $customer->stripe_id == null ){
+            $customer->createAsStripeCustomer();
+        }
+    
+        $customer->addPaymentMethod( $paymentMethodID );
+        $customer->updateDefaultPaymentMethod( $paymentMethodID );
+        
+        return response()->json( null, 204 );  
+    }
 }

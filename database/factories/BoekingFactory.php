@@ -46,7 +46,7 @@ class BoekingFactory extends Factory
         $walk->save();
 
         return [
-            "datum" => $this->faker->dateTime($max = 'now', $timezone = null),
+            "datum" => $this->faker->dateTimeBetween($startDate = '-3 week', $endDate = 'now', $timezone = null),
             "kortingscode" => "Bruinvis-1",
             "personen" => $personen,
             "bedrag_betaald" => $bedrag,

@@ -22,7 +22,7 @@ class Walk extends Model
      * @var array
      */
     protected $fillable = [
-        'locatie', 'beschrijving'
+        'locatie', 'beschrijving', "prijs", "max_aantal_personen", "max_boekings_datum", "aantal_geboekt", "omzet"
     ];
 
     public function boeking() 

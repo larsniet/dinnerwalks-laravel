@@ -25,4 +25,6 @@ Route::get('walks', [ApiController::class, 'getWalks']);
 Route::get('horeca', [ApiController::class, 'getHoreca']);
 
 Route::post('contactForm', [ApiController::class, 'sendContactForm']);
+Route::post('/user/payments', [ApiController::class, 'postPaymentMethods']);
+
 

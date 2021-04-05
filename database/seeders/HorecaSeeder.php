@@ -115,7 +115,7 @@ class HorecaSeeder extends Seeder
         ]);
 
         DB::table('horecas')->insert([
-            'naam' => "Hotel Steeds aan zee & Grand Cafe de Koningin",
+            'naam' => "Hotel Steeds aan zee",
             'email' => Str::random(10).'@gmail.com',
             'logo' => "images/steedsaanzee.png",
             "adres" => "Kon. Wilhelminastraat 14",
