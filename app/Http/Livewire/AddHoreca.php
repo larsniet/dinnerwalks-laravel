@@ -70,6 +70,9 @@ class AddHoreca extends Component
             'walk_id' => $walk->id,
         ]);
 
+        $user->horeca_id = $horeca->id;
+        $user->save();
+
         if ($horeca && $user) {
             Mail::to($this->email)->send(new sendNewUserDetails($this->userName, $this->naam, $this->email, $walk->locatie, $password));
         } else {

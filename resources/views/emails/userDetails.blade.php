@@ -91,13 +91,18 @@
                                             bedoeld om makkelijk te kunnen checken hoeveel mensen op pad gaan/zijn en
                                             welke code ze van ons hebben gekregen.</p>
 
-                                        <p>Het is in verband met veiligheidsredenen niet mogelijk om je wachtwoord/email
-                                            te veranderen. Als het echt nodig is, kan je ons telefonisch bereiken en dan
-                                            komen we er vast en zeker samen uit :).</p>
-
-                                        <p>Super leuk dat {{ $naam }} zich heeft aangesloten bij Dinnerwalks en
+                                        <p
+                                            style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #888888; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
+                                            Super leuk dat {{ $naam }} zich heeft aangesloten bij Dinnerwalks en
                                             we hopen dat jullie er nog veel profijt van zullen hebben!</p>
 
+                                        <p
+                                            style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #888888; font-size: 13px; line-height: 1.5em; margin-top: 0; text-align: left;">
+                                            Het is mogelijk om je wachtwoord te veranderen, dit wordt alleen niet
+                                            aangeraden in verband met veiligheidsredenen. Ook wordt het aangeraden om
+                                            twee factor authenticatie aan te zetten om te voorkomen dat gevoelige data
+                                            gaat lekken. Uiteraard zijn wij goed beveiligd en versturen we zo min
+                                            mogelijk gevoelige informatie :).</p>
                                     </td>
                                 </tr>
                             </table>
