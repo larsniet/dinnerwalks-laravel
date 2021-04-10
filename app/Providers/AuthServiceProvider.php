@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport; // add this 
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,8 +15,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Team::class => TeamPolicy::class,
-    ];
+        'App\Model' => 'App\Policies\ModelPolicy', // uncomment this line
+   ];
 
     /**
      * Register any authentication / authorization services.
@@ -26,6 +27,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Passport::routes(); // Add this 
     }
 }

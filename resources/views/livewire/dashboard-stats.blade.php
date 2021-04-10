@@ -10,7 +10,7 @@
         </div>
         <div>
             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                Totaal Klanten
+                Totaal klanten
             </p>
             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                 {{ $customers->count() }}
@@ -46,10 +46,10 @@
         </div>
         <div>
             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                Transacties
+                Afgeronde Transacties
             </p>
             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                {{ $transacties }}
+                {{ $afgerondeTransacties }}
             </p>
         </div>
     </div>
@@ -64,10 +64,10 @@
         </div>
         <div>
             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                Pending contacts
+                Afgebroken Transacties
             </p>
             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                35
+                {{ $afgebrokenTransacties }}
             </p>
         </div>
     </div>

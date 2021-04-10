@@ -48,8 +48,9 @@ class BoekingFactory extends Factory
         return [
             "datum" => $this->faker->dateTimeBetween($startDate = '-3 week', $endDate = 'now', $timezone = null),
             "kortingscode" => "Bruinvis-1",
+            "status" => $this->faker->randomElement(['Betaald', 'Afgebroken']),
             "personen" => $personen,
-            "bedrag_betaald" => $bedrag,
+            "prijs_boeking" => $bedrag,
             "walk_id" => $walk->id,
             "customer_id" => null
         ];

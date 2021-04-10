@@ -14,8 +14,9 @@ class DisplayCustomers extends Component
     {
         if (Auth::user()->email === "admin@dinnerwalks.nl") {
             return view('livewire.display-customers', [
-                'customers' => Customer::all(),
-                'boekingen' => Boeking::all()
+                'boekingen' => Boeking::where("customer_id", "!=", null)
+                                    ->orderBy('datum', 'desc')
+                                    ->paginate(20)
             ]);
         }
 

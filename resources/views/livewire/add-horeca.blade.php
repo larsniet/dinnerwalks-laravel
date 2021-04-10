@@ -40,7 +40,8 @@
                     class="block w-full pl-20 mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
                     placeholder="www.instagram.com/mijninsta" />
                 <button disabled
-                    class="absolute inset-y-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-l-md border-t-2 focus:outline-none focus:shadow-outline-purple pointer-events-none dark:focus:shadow-outline-gray">
+                    class="absolute inset-y-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-l-md border-t-2 focus:outline-none focus:shadow-outline-purple pointer-events-none dark:focus:shadow-outline-gray"
+                    style="color: #9c9c9c">
                     https://
                 </button>
             </div>
@@ -54,7 +55,8 @@
                     class="block w-full pl-20 mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
                     placeholder="www.facebook.com/mijnfacebook" />
                 <button disabled
-                    class="absolute inset-y-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-l-md border-t-2 focus:outline-none focus:shadow-outline-purple pointer-events-none dark:focus:shadow-outline-gray">
+                    class="absolute inset-y-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-l-md border-t-2 focus:outline-none focus:shadow-outline-purple pointer-events-none dark:focus:shadow-outline-gray"
+                    style="color: #9c9c9c">
                     https://
                 </button>
             </div>
@@ -68,7 +70,8 @@
                     class="block w-full pl-20 mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
                     placeholder="www.mijnwebsite.nl" />
                 <button disabled
-                    class="absolute inset-y-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-l-md border-t-2 focus:outline-none focus:shadow-outline-purple pointer-events-none dark:focus:shadow-outline-gray">
+                    class="absolute inset-y-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-l-md border-t-2 focus:outline-none focus:shadow-outline-purple pointer-events-none dark:focus:shadow-outline-gray"
+                    style="color: #9c9c9c">
                     https://
                 </button>
             </div>

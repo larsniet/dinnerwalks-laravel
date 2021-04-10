@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             WalkSeeder::class,
             HorecaSeeder::class,
+            FaqSeeder::class
         ]);
         Customer::factory()->count(40)
                 ->hasBoeking(1, function (array $attributes, Customer $customer) {

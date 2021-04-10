@@ -11,32 +11,28 @@ class AddWalk extends Component
 {
     public $locatie;
     public $beschrijving;
+    public $kosten;
+    public $personen;
 
     protected $rules = [
         'locatie' => 'required',
         'beschrijving' => 'required|max:50',
+        'kosten' => 'required',
+        'personen' => 'required'
     ];
 
     public function addWalk()
     {
         $this->validate();
-
-        // if (!Team::where('name', $this->locatie)->first()) {
-        //     Team::create([
-        //         'user_id' => 1,
-        //         'name' => $this->locatie,
-        //         'personal_team' => false
-        //     ]);
-        // };
         
-        $date = strtotime('10/10/2021');
+        $date = strtotime('15/10/2021');
 
         Walk::create([
             'locatie' => $this->locatie,
             'beschrijving' => $this->beschrijving,
-            "max_aantal_personen" => 2,
+            "max_aantal_personen" => $this->personen,
             "max_boekings_datum" => date('Y-m-d', $date),
-            "prijs" => 3.50
+            "prijs" => $this->kosten
         ]);
         $this->emit('saved');
         return Redirect::back();

@@ -15,10 +15,11 @@ class CreateBoekingenTable extends Migration
     {
         Schema::create('boekingen', function (Blueprint $table) {
             $table->id();
-            $table->dateTime("datum", $precision = 0);
+            $table->date("datum", $precision = 0);
             $table->string("kortingscode");
             $table->integer("personen");
-            $table->float("bedrag_betaald");
+            $table->float("prijs_boeking");
+            $table->string("status")->default("Afgebroken");
             
             $table->unsignedBigInteger("walk_id");
             $table->foreign('walk_id')->references('id')->on('walks');

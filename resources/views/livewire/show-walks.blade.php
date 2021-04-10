@@ -7,7 +7,6 @@
                     <th class="px-4 py-3">Locatie</th>
                     <th class="px-4 py-3">Aantal keer geboekt</th>
                     <th class="px-4 py-3">Totale Omzet</th>
-                    <th class="px-4 py-3">Status</th>
                     <th class="px-4 py-3">Acties</th>
                 </tr>
             </thead>
@@ -32,12 +31,6 @@
                         </td>
                         <td class="px-4 py-3 text-xs">
                             € {{ $walk->omzet }}
-                        </td>
-                        <td class="px-4 py-3 text-sm">
-                            <span
-                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                Actief
-                            </span>
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">

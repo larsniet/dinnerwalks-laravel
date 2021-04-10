@@ -64,9 +64,9 @@ class AddHoreca extends Component
             'email' => $this->email,
             'logo' => "storage/".trim($logo, "public/"),
             'adres' => $this->adres,
-            'website' => $this->website,
-            'instagram' => $this->instagram,
-            'facebook' => $this->facebook,
+            'website' => "https://".$this->website,
+            'instagram' => "https://".$this->instagram,
+            'facebook' => "https://".$this->facebook,
             'walk_id' => $walk->id,
         ]);
 

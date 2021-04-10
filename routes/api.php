@@ -15,16 +15,16 @@ use App\Http\Controllers\ApiController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware(['auth:api'])->group(function () {
+    
+    Route::get('customers', [ApiController::class, 'getCustomers']);
+    Route::get('walks', [ApiController::class, 'getWalks']);
+    Route::get('horeca', [ApiController::class, 'getHoreca']);
+    
+    Route::post('contactForm', [ApiController::class, 'sendContactForm']);
+    
+    Route::post('/test', [ApiController::class, 'test']);
 
-
-Route::get('customers', [ApiController::class, 'getCustomers']);
-Route::get('walks', [ApiController::class, 'getWalks']);
-Route::get('horeca', [ApiController::class, 'getHoreca']);
-
-Route::post('contactForm', [ApiController::class, 'sendContactForm']);
-Route::post('/user/payments', [ApiController::class, 'postPaymentMethods']);
-
-
+    Route::post('/customer/betaald-success', [ApiController::class, 'updateCustomer']);
+    Route::post('/customer/create-session', [ApiController::class, 'createSession']);
+// });

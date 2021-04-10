@@ -27,7 +27,7 @@ class Boeking extends Model
      * @var array
      */
     protected $fillable = [
-        'datum', 'kortingscode', 'locatie', 'personen'
+        'datum', 'kortingscode', 'locatie', 'personen', 'prijs_boeking', 'walk_id', 'customer_id'
     ];
 
     protected $searchable = [

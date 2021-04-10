@@ -13,14 +13,18 @@ class DashboardStats extends Component
         $boekingen = Boeking::all();
         $omzet = 0;
         foreach ($boekingen as $key => $boeking) {
-            $omzet += $boeking->bedrag_betaald;
+            if ($boeking->status === "Betaald") {
+                $omzet += $boeking->prijs_boeking;
+            }
         }
-        $transacties = $boekingen->count();
+        $afgerondeTransacties = $boekingen->where('status', '==', 'Betaald');
+        $afgebrokenTransacties = $boekingen->where('status', '!=', 'Betaald');
 
         return view('livewire.dashboard-stats', [
             'customers' => Customer::all(),
             'omzet' => $omzet,
-            'transacties' => $transacties
+            'afgerondeTransacties' => $afgerondeTransacties->count(),
+            'afgebrokenTransacties' => $afgebrokenTransacties->count()
         ]);
     }
 }
