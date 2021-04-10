@@ -19,6 +19,7 @@ use App\Http\Controllers\ApiController;
     
     Route::get('customers', [ApiController::class, 'getCustomers']);
     Route::get('walks', [ApiController::class, 'getWalks']);
+    Route::get('faqs', [ApiController::class, 'getFaqs']);
     Route::get('horeca', [ApiController::class, 'getHoreca']);
     
     Route::post('contactForm', [ApiController::class, 'sendContactForm']);

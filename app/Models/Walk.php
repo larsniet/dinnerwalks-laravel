@@ -17,12 +17,19 @@ class Walk extends Model
     protected $table = 'walks';
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['max_boekings_datum'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'locatie', 'beschrijving', "prijs", "max_aantal_personen", "max_boekings_datum", "aantal_geboekt", "omzet"
+        'locatie', 'beschrijving', "prijs", "preview", "max_aantal_personen", "max_boekings_datum", "aantal_geboekt", "omzet"
     ];
 
     public function boeking() 

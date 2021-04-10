@@ -5,6 +5,11 @@
         </h2>
 
         <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+            Algemene instellingen
+        </h4>
+        <livewire:global-walks />
+
+        <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
             Walk toevoegen
         </h4>
         <livewire:add-walk />

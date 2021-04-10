@@ -9,6 +9,7 @@ use App\Mail\sendContactForm;
 use App\Models\Customer;
 use App\Models\Boeking;
 use App\Models\Walk;
+use App\Models\Faq;
 use App\Models\Horeca;
 use DateTime;
 use Mail;
@@ -23,6 +24,11 @@ class ApiController extends Controller
     public function getHoreca() 
     {
         return response()->json(Horeca::all());
+    }
+
+    public function getFaqs()
+    {
+        return response()->json(Faq::all());
     }
 
     public function getCustomers() 
@@ -46,12 +52,12 @@ class ApiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
-            'phone' => 'required',
+            'phone' => 'required|numeric|max:12',
             'email' => 'required|email|max:255',
-            'walkId' => 'required',
-            'aantalPersonen' => 'required',
-            'prijs' => 'required',
-            'datum' => 'required'
+            'walkId' => 'required|numeric',
+            'aantalPersonen' => 'required|numeric|max:3',
+            'prijs' => 'required|numeric',
+            'datum' => 'required|date|max:10'
         ]);
         if ($validator->fails()) {
             return response()->json([

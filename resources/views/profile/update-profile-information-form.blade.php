@@ -44,12 +44,25 @@
             <x-input-error for="name" class="mt-2" />
         </div>
 
-        <!-- Email -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="E-mail" />
-            <x-input id="email" type="email" class="block w-full mt-1" wire:model.defer="state.email" />
-            <x-input-error for="email" class="mt-2" />
-        </div>
+        @if (Auth::user()->email === 'admin@dinnerwalks.nl')
+            <!-- Email -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="email" value="E-mail" />
+                <x-input id="email" disabled type="email" class="block w-full mt-1" wire:model.defer="state.email" />
+                <x-input-error for="email" class="mt-2" />
+            </div>
+
+        @else
+
+            <!-- Email -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="email" value="E-mail" />
+                <x-input id="email" type="email" class="block w-full mt-1" wire:model.defer="state.email" />
+                <x-input-error for="email" class="mt-2" />
+            </div>
+
+        @endif
+
     </x-slot>
 
     <x-slot name="actions">
