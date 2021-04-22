@@ -6,6 +6,8 @@
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">Klant</th>
+                        <th class="px-4 py-3">Walk</th>
+                        <th class="px-4 py-3">Telefoon</th>
                         <th class="px-4 py-3">Bedrag</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3">Datum</th>
@@ -28,8 +30,17 @@
                                 <div class="flex items-center text-sm">
                                     <div>
                                         <p class="font-semibold">{{ $boeking->customer->name }}</p>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">
+                                            {{ $boeking->customer->email }}
+                                        </p>
                                     </div>
                                 </div>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{ $boeking->walk->locatie }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <a href="tel:{{ $boeking->customer->phone }}">{{ $boeking->customer->phone }}</a>
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 € {{ $boeking->prijs_boeking }}
@@ -52,13 +63,31 @@
                             </td>
                         </tr>
                     @endforeach
+
+                @else
+
+                    @foreach ($boekingen as $boeking)
+                        <tr class="text-gray-700 dark:text-gray-400">
+                            <td class="px-4 py-3 text-sm">
+                                {{ $boeking->kortingscode }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{ $boeking->personen }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{ $boeking->datum }}
+                            </td>
+                        </tr>
+                    @endforeach
                 @endif
 
             </tbody>
         </table>
     </div>
-    <div
-        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-        {{ $boekingen->links() }}
-    </div>
+    @if (Auth::user()->email === 'admin@dinnerwalks.nl')
+        <div
+            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+            {{ $boekingen->links() }}
+        </div>
+    @endif
 </div>

@@ -19,6 +19,13 @@ class CreateWalksTable extends Migration
             $table->string("beschrijving");
             $table->float("prijs");
             $table->binary("preview");
+            $table->binary("pdf");
+
+            $table->binary("podcast1");
+            $table->binary("podcast2");
+            $table->binary("podcast3");
+            $table->binary("podcast4");
+            $table->binary("podcast5");
 
             $table->integer("max_aantal_personen");
             $table->date("max_boekings_datum");

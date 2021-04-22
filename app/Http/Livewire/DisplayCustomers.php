@@ -4,7 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Customer;
+use App\Models\Walk;
 use App\Models\Boeking;
+use App\Models\Horeca;
 use Auth;
 use Date;
 
@@ -20,10 +22,16 @@ class DisplayCustomers extends Component
             ]);
         }
 
+        $horecaOnderneming = Horeca::where('id', Auth::user()->id)->first();
+        $walk = Walk::where('id', $horecaOnderneming->id)->first();
+        $boekingen = Boeking::whereBetween('datum', [
+            date('Y-m-d'),
+            date('Y-m-d', strtotime("+1 week"))])->paginate(10);
+        $boekingen = $boekingen->where('walk_id', '==', $walk->id);
+        $boekingen = $boekingen->where('status', "==", "Betaald");
+        
         return view('livewire.display-customers', [
-            'boekingen' => Boeking::whereBetween('datum', [
-                date('Y-m-d', strtotime("-1 week")), 
-                date('Y-m-d')])->get()
+            'boekingen' => $boekingen
         ]);
 
     }

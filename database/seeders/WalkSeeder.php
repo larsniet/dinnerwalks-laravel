@@ -20,6 +20,14 @@ class WalkSeeder extends Seeder
             "locatie" => "Noordwijk",
             "beschrijving" => "Mooi plekkie aan de zee",
             "preview" => "storage/walks/noordwijk/noordwijk.jpg",
+            "pdf" => "storage/walks/noordwijk/noordwijk.pdf",
+
+            "podcast1" => "storage/walks/noordwijk/podcasts/Deel_1.mp3",
+            "podcast2" => "storage/walks/noordwijk/podcasts/Deel_2.mp3",
+            "podcast3" => "storage/walks/noordwijk/podcasts/Deel_3.mp3",
+            "podcast4" => "storage/walks/noordwijk/podcasts/Deel_4.mp3",
+            "podcast5" => "storage/walks/noordwijk/podcasts/Deel_5.mp3",
+
             "max_aantal_personen" => 2,
             "max_boekings_datum" => date('Y-m-d', $date),
             "prijs" => 3.50
@@ -28,6 +36,14 @@ class WalkSeeder extends Seeder
             "locatie" => "Katwijk",
             "beschrijving" => "Lekker mooi strand en ondergrondse garage",
             "preview" => "storage/walks/katwijk/katwijk.jpg",
+            "pdf" => "storage/walks/katwijk/katwijk.pdf",
+
+            "podcast1" => "storage/walks/katwijk/podcasts/Deel_1.mp3",
+            "podcast2" => "storage/walks/katwijk/podcasts/Deel_2.mp3",
+            "podcast3" => "storage/walks/katwijk/podcasts/Deel_3.mp3",
+            "podcast4" => "storage/walks/katwijk/podcasts/Deel_4.mp3",
+            "podcast5" => "storage/walks/katwijk/podcasts/Deel_5.mp3",
+
             "max_aantal_personen" => 2,
             "max_boekings_datum" => date('Y-m-d', $date),
             "prijs" => 3.50
