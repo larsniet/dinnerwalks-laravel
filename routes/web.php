@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::group(['middleware' => CheckIfAdmin::class], function () {
         Route::view('walk', 'walk')->name('walk');
         Route::view('horeca', 'horeca')->name('horeca');
+        Route::view('kortingscodes', 'kortingscodes')->name('kortingscodes');
         Route::view('faq', 'faq')->name('faq');
     
         Route::view('forms', 'forms')->name('forms');

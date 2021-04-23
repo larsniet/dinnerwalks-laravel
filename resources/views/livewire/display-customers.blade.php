@@ -29,7 +29,7 @@
                             <td class="px-4 py-3">
                                 <div class="flex items-center text-sm">
                                     <div>
-                                        <p class="font-semibold">{{ $boeking->customer->name }}</p>
+                                        <p class="font-semibold">{{ $boeking->customer->naam }}</p>
                                         <p class="text-xs text-gray-600 dark:text-gray-400">
                                             {{ $boeking->customer->email }}
                                         </p>
@@ -40,7 +40,8 @@
                                 {{ $boeking->walk->locatie }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <a href="tel:{{ $boeking->customer->phone }}">{{ $boeking->customer->phone }}</a>
+                                <a
+                                    href="tel:{{ $boeking->customer->telefoonnummer }}">{{ $boeking->customer->telefoonnummer }}</a>
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 € {{ $boeking->prijs_boeking }}

@@ -4,21 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Boeking;
-use Laravel\Cashier\Billable;
 
-
-class Customer extends Model
+class Kortingscode extends Model
 {
     use HasFactory;
-    use Billable;
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'customers';
+    protected $table = 'kortingscodes';
 
     /**
      * The attributes that are mass assignable.
@@ -26,12 +22,11 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'naam', 'email', 'telefoonnummer'
+        'code'
     ];
 
-    public function boeking() 
+    public function walk() 
     {
-        return $this->hasOne(Boeking::class, 'customer_id');
+        return $this->belongsTo(Walk::class);
     }   
-
 }

@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Boeking;
 use App\Models\Walk;
 use App\Models\Faq;
+use App\Models\Kortingscode;
 use App\Models\Horeca;
 use DateTime;
 use Mail;
@@ -51,18 +52,18 @@ class ApiController extends Controller
     public function createSession(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'phone' => 'required|numeric|max:12',
+            'naam' => 'required|max:255',
+            'telefoonnummer' => 'required|phone:US,BE,NL,DE,FR,ES,EN,GB,mobile',
             'email' => 'required|email|max:255',
             'walkId' => 'required|numeric',
-            'aantalPersonen' => 'required|numeric|max:3',
+            'aantalPersonen' => 'required|numeric',
             'prijs' => 'required|numeric',
             'datum' => 'required|date|max:10'
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors()
-            ]);
+            ], 400);
         }
 
         \Stripe\Stripe::setApiKey('sk_test_51ISUAIEK50IisyE6xV7UFnL11Z05NSIpVhWQGf0JaVZ22RplwxNAq1nJtH3sPHpo7ZwOMvT8BKafgUZKJz0D3WF900YtacdP5F');
@@ -73,7 +74,7 @@ class ApiController extends Controller
                     'currency' => 'eur',
                     'product_data' => [
                         'name' => $walk->locatie,
-                        // 'images' => ["http://127.0.0.1:8000/$product->image"],
+                        'images' => ["https://admin.dinnerwalks.nl/$walk->preview"],
                     ],
                     'unit_amount' => $walk->prijs * 100,
                 ],
@@ -81,8 +82,8 @@ class ApiController extends Controller
         );
 
         $customer = Customer::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
+            'naam' => $request->naam,
+            'telefoonnummer' => $request->telefoonnummer,
             'email' => $request->email
         ]);
         
@@ -106,7 +107,7 @@ class ApiController extends Controller
             'mode' => 'payment',
             'locale' => 'nl',
             'line_items' => [$line_items],
-          ]);        
+        ]);        
     }
 
     public function updateCustomer(Request $request)

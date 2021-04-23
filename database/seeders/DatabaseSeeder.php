@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Boeking;
 use Database\Seeders\HorecaSeeder;
 use Database\Seeders\WalkSeeder;
+use Database\Seeders\KortingscodeSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,9 +24,10 @@ class DatabaseSeeder extends Seeder
         User::factory()->create();
         Team::factory()->create();
         $this->call([
+            KortingscodeSeeder::class,
             WalkSeeder::class,
             HorecaSeeder::class,
-            FaqSeeder::class
+            FaqSeeder::class,
         ]);
         Customer::factory()->count(40)
                 ->hasBoeking(1, function (array $attributes, Customer $customer) {

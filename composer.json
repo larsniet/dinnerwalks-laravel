@@ -21,6 +21,7 @@
         "laravel/sanctum": "^2.9",
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.4",
+        "propaganistas/laravel-phone": "^4.3",
         "realrashid/sweet-alert": "^3.2",
         "stripe/stripe-php": "^7.76"
     },

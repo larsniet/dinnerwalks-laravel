@@ -6,6 +6,7 @@ use Livewire\WithFileUploads;
 use Livewire\Component;
 use App\Models\Walk;
 use App\Models\Team;
+use App\Models\Kortingscode;
 use Redirect;
 
 class AddWalk extends Component
@@ -41,7 +42,18 @@ class AddWalk extends Component
 
     public function addWalk()
     {
-        $this->validate();        
+        $this->validate();    
+        
+        $kortingscodes = Kortingscode::all()->random(20);
+        $walks = Walk::all();
+        $kortingscode = "";
+        foreach ($walks as $walk) {
+            foreach ($kortingscodes as $code) {
+                if ($walk->kortingscode !== $code->code) {
+                    $kortingscode = $code->code;
+                }
+            }
+        }
 
         $preview = $this->preview->store('public/walks/'.$this->locatie);
         $pdf = $this->pdf->store('public/walks/'.$this->locatie);
@@ -55,6 +67,7 @@ class AddWalk extends Component
         Walk::create([
             'locatie' => $this->locatie,
             'beschrijving' => $this->beschrijving,
+            'kortingscode' => $kortingscode,
             'preview' => "storage/".trim($preview, "public/"),
             'pdf' => "storage/".trim($pdf, "public/"),
 

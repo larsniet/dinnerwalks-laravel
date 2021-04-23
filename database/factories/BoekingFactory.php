@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Boeking;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Boeking;
 use App\Models\Customer;
 use App\Models\Walk;
+use App\Models\Kortingscode;
 
 class BoekingFactory extends Factory
 {
@@ -47,7 +48,7 @@ class BoekingFactory extends Factory
 
         return [
             "datum" => $this->faker->dateTimeBetween($startDate = '-3 week', $endDate = '+3 week', $timezone = null),
-            "kortingscode" => "Bruinvis-1",
+            "kortingscode" => $walk->kortingscode,
             "status" => $this->faker->randomElement(['Betaald', 'Afgebroken']),
             "personen" => $personen,
             "prijs_boeking" => $bedrag,

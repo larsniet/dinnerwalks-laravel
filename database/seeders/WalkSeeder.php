@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Kortingscode;
 use DB;
 
 class WalkSeeder extends Seeder
@@ -14,11 +15,12 @@ class WalkSeeder extends Seeder
      */
     public function run()
     {
-        $date = strtotime('04/10/2021');
+        $date = strtotime('04/10/2022');
 
         DB::table('walks')->insert([
             "locatie" => "Noordwijk",
             "beschrijving" => "Mooi plekkie aan de zee",
+            "kortingscode" => Kortingscode::all()->random()->code,
             "preview" => "storage/walks/noordwijk/noordwijk.jpg",
             "pdf" => "storage/walks/noordwijk/noordwijk.pdf",
 
@@ -35,6 +37,7 @@ class WalkSeeder extends Seeder
         DB::table('walks')->insert([
             "locatie" => "Katwijk",
             "beschrijving" => "Lekker mooi strand en ondergrondse garage",
+            "kortingscode" => Kortingscode::all()->random()->code,
             "preview" => "storage/walks/katwijk/katwijk.jpg",
             "pdf" => "storage/walks/katwijk/katwijk.pdf",
 

@@ -92,6 +92,7 @@ return [
     'not_in'               => 'Het formaat van :attribute is ongeldig.',
     'not_regex'            => 'De :attribute formaat is ongeldig.',
     'numeric'              => ':Attribute moet een nummer zijn.',
+    'phone'                => ':Attribute is ongeldig.',
     'password'             => 'Wachtwoord is onjuist.',
     'present'              => ':Attribute moet bestaan.',
     'regex'                => ':Attribute formaat is ongeldig.',

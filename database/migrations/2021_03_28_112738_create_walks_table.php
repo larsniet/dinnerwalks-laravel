@@ -18,6 +18,7 @@ class CreateWalksTable extends Migration
             $table->string("locatie")->unique();
             $table->string("beschrijving");
             $table->float("prijs");
+            $table->string("kortingscode")->unique();
             $table->binary("preview");
             $table->binary("pdf");
 
