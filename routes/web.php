@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckIfAdmin;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,13 @@ use App\Http\Middleware\CheckIfAdmin;
 |
 */
 
+// Standaard naar loginpagina
 Route::get('/', function () {
     return view('auth/login');
 });
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
+// Stripe webhook call bij betaling
+Route::stripeWebhooks('charge_customer');
 
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
@@ -34,7 +35,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::view('horeca', 'horeca')->name('horeca');
         Route::view('kortingscodes', 'kortingscodes')->name('kortingscodes');
         Route::view('faq', 'faq')->name('faq');
-    
+
         Route::view('forms', 'forms')->name('forms');
         Route::view('cards', 'cards')->name('cards');
         Route::view('charts', 'charts')->name('charts');

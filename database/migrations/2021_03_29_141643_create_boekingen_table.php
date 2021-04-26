@@ -17,6 +17,7 @@ class CreateBoekingenTable extends Migration
             $table->id();
             $table->date("datum", $precision = 0);
             $table->string("kortingscode");
+            $table->string("unieke_code")->unique();
             $table->integer("personen");
             $table->float("prijs_boeking");
             $table->string("status")->default("Afgebroken");

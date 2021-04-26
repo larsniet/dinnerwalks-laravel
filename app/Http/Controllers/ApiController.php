@@ -43,14 +43,21 @@ class ApiController extends Controller
         return response()->json(200);
     }
 
-    public function test(Request $request)
+    public function checkUniekeCode(Request $request)
     {
-        $url = $request->all();
-        return response()->json($url);
+        if ($boeking = Boeking::where('unieke_code', $request->code)->first()) {
+            if ($boeking->walk->locatie === $request->walk) {
+                return response()->json(['status', 'success'], 200);
+            }
+            return response()->json(['status', 'failed'], 401);
+        } else {
+            return response()->json(['status', 'failed'], 401);
+        }
     }
 
     public function createSession(Request $request)
     {
+        // Valideer de aanvraag
         $validator = Validator::make($request->all(), [
             'naam' => 'required|max:255',
             'telefoonnummer' => 'required|phone:US,BE,NL,DE,FR,ES,EN,GB,mobile',
@@ -65,9 +72,10 @@ class ApiController extends Controller
                 'errors' => $validator->errors()
             ], 400);
         }
+        
 
+        // Setup voor Stripe Checkout
         \Stripe\Stripe::setApiKey('sk_test_51ISUAIEK50IisyE6xV7UFnL11Z05NSIpVhWQGf0JaVZ22RplwxNAq1nJtH3sPHpo7ZwOMvT8BKafgUZKJz0D3WF900YtacdP5F');
-
         $walk = Walk::where('id', $request->walkId)->first();
         $line_items = array(
                 'price_data' => [
@@ -81,47 +89,48 @@ class ApiController extends Controller
                 'quantity' => $request->aantalPersonen,
         );
 
+        // Aanmaken klant
         $customer = Customer::create([
             'naam' => $request->naam,
             'telefoonnummer' => $request->telefoonnummer,
             'email' => $request->email
         ]);
-        
+
+        // Aanmaken van kortingscode gebaseerd kortingscode, random int en ID
+        $kortingscode = $walk->kortingscode . '-' . random_int(0,9) . $customer->id;
+
+        // Aanmaken boeking
         $boeking = Boeking::create([
             'datum' => DateTime::createFromFormat('Y-m-d', $request->datum),
-            'kortingscode' => 'EENVIS-2',
+            'kortingscode' => $kortingscode,
             'personen' => $request->aantalPersonen,
+            'unieke_code' => $this->generateRandomString(12),
             'prijs_boeking' => floatval($request->prijs),
             'walk_id' => $walk->id,
             'customer_id' => $customer->id
         ]);
 
+        // Stripe sessie aanmaken en terug sturen naar de frontend
         return CheckoutSession::create([
-            'success_url' => 'http://localhost:3000?betaald=success&boeking='.$boeking->id,
+            'success_url' => 'http://localhost:3000?betaald=success',
             'cancel_url' => 'http://localhost:3000?betaald=failure',
             // 'success_url' => env('BETA_APP_URL').'?betaald=success?customer='.$customer->id,
             // 'cancel_url' => env('BETA_APP_URL').'?betaald=failure',
             'payment_method_types' => ['ideal', 'card'],
-            'client_reference_id' => $customer->id,
+            'client_reference_id' => $boeking->id,
             'customer_email' => $customer->email,
             'mode' => 'payment',
             'locale' => 'nl',
             'line_items' => [$line_items],
         ]);        
     }
-
-    public function updateCustomer(Request $request)
-    {
-        $boeking = Boeking::where('id', $request->boekingId)->first();
-
-        if ($boeking->status !== "Betaald") {
-            $boeking->status = "Betaald";
-            $boeking->save();
-    
-            $walk = Walk::where('id', $boeking->walk_id)->first();
-            $walk->omzet += $boeking->prijs_boeking;
-            $walk->aantal_geboekt = $walk->aantal_geboekt + 1;
-            $walk->save();
+    public function generateRandomString($length = 20) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+        return $randomString;
     }
 }

@@ -49,11 +49,22 @@ class BoekingFactory extends Factory
         return [
             "datum" => $this->faker->dateTimeBetween($startDate = '-3 week', $endDate = '+3 week', $timezone = null),
             "kortingscode" => $walk->kortingscode,
+            "unieke_code" => $this->generateRandomString(12),
             "status" => $this->faker->randomElement(['Betaald', 'Afgebroken']),
             "personen" => $personen,
             "prijs_boeking" => $bedrag,
             "walk_id" => $walk->id,
             "customer_id" => null
         ];
+    }
+
+    public function generateRandomString($length = 20) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

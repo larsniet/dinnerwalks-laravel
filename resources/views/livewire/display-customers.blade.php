@@ -10,7 +10,7 @@
                         <th class="px-4 py-3">Telefoon</th>
                         <th class="px-4 py-3">Bedrag</th>
                         <th class="px-4 py-3">Status</th>
-                        <th class="px-4 py-3">Datum</th>
+                        <th class="px-4 py-3">Datum Walk</th>
                     </tr>
                 @else
                     <tr
@@ -36,9 +36,17 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ $boeking->walk->locatie }}
+                            <td class="px-4 py-3">
+                                <div class="flex items-center text-sm">
+                                    <div>
+                                        <p class="font-semibold">{{ $boeking->walk->locatie }}</p>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">
+                                            {{ $boeking->kortingscode }}
+                                        </p>
+                                    </div>
+                                </div>
                             </td>
+
                             <td class="px-4 py-3 text-sm">
                                 <a
                                     href="tel:{{ $boeking->customer->telefoonnummer }}">{{ $boeking->customer->telefoonnummer }}</a>

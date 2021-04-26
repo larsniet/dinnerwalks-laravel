@@ -23,9 +23,8 @@ use App\Http\Controllers\ApiController;
     Route::get('horeca', [ApiController::class, 'getHoreca']);
     
     Route::post('contactForm', [ApiController::class, 'sendContactForm']);
-    
-    Route::post('/test', [ApiController::class, 'test']);
+    Route::post('checkUniekeCode', [ApiController::class, 'checkUniekeCode']);
 
-    Route::post('/customer/betaald-success', [ApiController::class, 'updateCustomer']);
     Route::post('/customer/create-session', [ApiController::class, 'createSession']);
+
 // });
