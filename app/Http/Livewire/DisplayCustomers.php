@@ -23,7 +23,7 @@ class DisplayCustomers extends Component
         }
 
         $horecaOnderneming = Horeca::where('id', Auth::user()->id)->first();
-        $walk = Walk::where('id', $horecaOnderneming->id)->first();
+        $walk = Walk::where('id', $horecaOnderneming->walk_id)->first();
         $boekingen = Boeking::whereBetween('datum', [
             date('Y-m-d'),
             date('Y-m-d', strtotime("+1 week"))])->paginate(10);

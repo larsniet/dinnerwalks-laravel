@@ -42,6 +42,7 @@ class sendBoekingDetails extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.sendBoekingDetails')->subject("Uw boeking bij Dinnerwalks");
+        return $this->markdown('emails.sendBoekingDetails')
+                    ->subject("Uw boeking bij Dinnerwalks");
     }
 }

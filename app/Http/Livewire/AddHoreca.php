@@ -74,7 +74,7 @@ class AddHoreca extends Component
         $user->save();
 
         if ($horeca && $user) {
-            Mail::to($this->email)->send(new sendNewUserDetails($this->userName, $this->naam, $this->email, $walk->locatie, $password));
+            Mail::to($this->email)->send(new sendNewUserDetails($this->userName, $this->naam, $this->email, $walk->locatie, $password, "https://".$this->website));
         } else {
             return $this->emit('error');
         }

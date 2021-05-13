@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             HorecaSeeder::class,
             FaqSeeder::class,
         ]);
-        Customer::factory()->count(40)
+        Customer::factory()->count(4000)
                 ->hasBoeking(1, function (array $attributes, Customer $customer) {
                     return ['customer_id' => $customer->id];
                 })

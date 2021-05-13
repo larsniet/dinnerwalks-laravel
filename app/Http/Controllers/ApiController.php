@@ -39,15 +39,19 @@ class ApiController extends Controller
 
     public function sendContactForm(Request $request) 
     {
-        Mail::to('info@dinnerwalks.nl')->send(new sendContactForm($request->naam, $request->email, $request->bericht));
+        Mail::to('larsvanderniet@gmail.com')->send(new sendContactForm($request->naam, $request->email, $request->bericht));
         return response()->json(200);
     }
 
     public function checkUniekeCode(Request $request)
     {
+        
         if ($boeking = Boeking::where('unieke_code', $request->code)->first()) {
             if ($boeking->walk->locatie === $request->walk) {
-                return response()->json(['status', 'success'], 200);
+                if ($boeking->status === "Betaald") {
+                    return response()->json(['status', 'success'], 200);
+                }
+                return response()->json(['status', 'failed'], 401);
             }
             return response()->json(['status', 'failed'], 401);
         } else {
@@ -116,7 +120,7 @@ class ApiController extends Controller
             'cancel_url' => 'http://localhost:3000?betaald=failure',
             // 'success_url' => env('BETA_APP_URL').'?betaald=success?customer='.$customer->id,
             // 'cancel_url' => env('BETA_APP_URL').'?betaald=failure',
-            'payment_method_types' => ['ideal', 'card'],
+            'payment_method_types' => ['ideal'],
             'client_reference_id' => $boeking->id,
             'customer_email' => $customer->email,
             'mode' => 'payment',

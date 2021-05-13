@@ -34,6 +34,8 @@ class sendContactForm extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contactForm')->subject("Contactformulier is ingevuld");
+        return $this->from($this->email)
+                    ->markdown('emails.contactForm')
+                    ->subject("Contactformulier is ingevuld");
     }
 }
