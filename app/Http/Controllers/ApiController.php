@@ -100,7 +100,7 @@ class ApiController extends Controller
             'email' => $request->email
         ]);
 
-        // Aanmaken van kortingscode gebaseerd kortingscode, random int en ID
+        // Aanmaken van kortingscode gebaseerd op huidige kortingscode, random int en ID
         $kortingscode = $walk->kortingscode . '-' . random_int(0,9) . $customer->id;
 
         // Aanmaken boeking
