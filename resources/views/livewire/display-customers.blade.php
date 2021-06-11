@@ -68,7 +68,7 @@
                                 @endif
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $boeking->datum }}
+                                {{-- {{ $boeking->datum }} --}}
                             </td>
                         </tr>
                     @endforeach

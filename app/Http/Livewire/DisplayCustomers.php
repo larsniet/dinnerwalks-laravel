@@ -31,7 +31,7 @@ class DisplayCustomers extends Component
         $boekingen = $boekingen->where('status', "==", "Betaald");
         
         return view('livewire.display-customers', [
-            'boekingen' => $boekingen
+            'boekingen' => $boekingen,
         ]);
 
     }

@@ -47,7 +47,7 @@ class ChargeCustomer implements ShouldQueue
 
             $url = "http://localhost:3000/walks/$walk->locatie?code=$boeking->unieke_code";
 
-            Mail::to($boeking->customer->email)->send(new sendBoekingDetails($boeking->customer->naam, $boeking->customer->email, $boeking->datum, $boeking->kortingscode, $boeking->personen, $boeking->prijs, $url));
+            Mail::to($boeking->customer->email)->send(new sendBoekingDetails($boeking->customer->naam, $boeking->customer->email, $boeking->datum, $boeking->kortingscode, $boeking->personen, $boeking->prijs, $url, $walk->locatie));
 
         } else {
             
