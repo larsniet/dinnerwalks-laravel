@@ -17,7 +17,6 @@ class BoekingFactory extends Factory
      */
     protected $model = Boeking::class;
 
-
     public function customerid()
     {
         return $this->state(function (array $attributes) {
@@ -54,7 +53,7 @@ class BoekingFactory extends Factory
             "personen" => $personen,
             "prijs_boeking" => $bedrag,
             "walk_id" => $walk->id,
-            "customer_id" => null
+            "customer_id" => $this->customerid()
         ];
     }
 

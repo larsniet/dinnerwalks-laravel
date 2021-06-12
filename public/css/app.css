@@ -51970,6 +51970,40 @@ video {
   box-shadow: 0 0 0 3px hsla(327.4, 82.9%, 83.9%, 0.45);
 }
 
+.spinner {
+  height:20px;
+  width:20px;
+  -webkit-animation: rotation .6s infinite linear;
+  animation: rotation .6s infinite linear;
+  border-left:6px solid rgba(0,174,239,.15);
+  border-right:6px solid rgba(0,174,239,.15);
+  border-bottom:6px solid rgba(0,174,239,.15);
+  border-top:6px solid rgba(0,174,239,.8);
+  border-radius:100%;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

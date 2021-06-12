@@ -20,6 +20,10 @@ class CreateCustomersTable extends Migration
             $table->string("telefoonnummer");
             $table->timestamps();
         });
+
+        DB::statement(
+            'ALTER TABLE customers ADD FULLTEXT fulltext_index(naam, email, telefoonnummer)'
+        );
     }
 
     /**

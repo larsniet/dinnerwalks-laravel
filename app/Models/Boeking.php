@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Walk;
 use App\Models\Customer;
-use App\Models\Search;
 
 class Boeking extends Model
 {
@@ -32,6 +31,7 @@ class Boeking extends Model
 
     protected $searchable = [
         'kortingscode',
+        'unieke_code',
         'datum',
         'locatie', 
         'personen'

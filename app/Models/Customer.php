@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Boeking;
 use Laravel\Cashier\Billable;
-
+use App\Models\Search;
 
 class Customer extends Model
 {
     use HasFactory;
     use Billable;
+    use Search;
 
     /**
      * The table associated with the model.
@@ -27,6 +28,12 @@ class Customer extends Model
      */
     protected $fillable = [
         'naam', 'email', 'telefoonnummer'
+    ];
+
+    protected $searchable = [
+        'naam',
+        'email',
+        'telefoonnummer'
     ];
 
     public function boeking() 
