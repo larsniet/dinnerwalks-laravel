@@ -24,7 +24,7 @@ class ApiController extends Controller
 
     public function getHoreca() 
     {
-        return response()->json(Horeca::all());
+        return response()->json(Horeca::where('status', "Actief")->get());
     }
 
     public function getFaqs()

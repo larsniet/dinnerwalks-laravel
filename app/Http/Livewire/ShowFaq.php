@@ -36,20 +36,6 @@ class ShowFaq extends Component
         $this->editedFaqIndex = null;
     }
 
-    public function addFaq() 
-    {
-        $this->validate();
-
-        Faq::create([
-            'vraag' => $this->vraag,
-            'antwoord' => $this->antwoord
-        ]);
-
-        $this->emit('saved');
-        return Redirect::back();
-    }
-
-
     public function editFaq($faqIndex) 
     {
         $this->editedFaqIndex = $faqIndex;

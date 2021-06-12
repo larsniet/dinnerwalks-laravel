@@ -19,6 +19,7 @@ class CreateHorecasTable extends Migration
             $table->string("email");
             $table->binary("logo");
             $table->string("adres");
+            $table->string("status")->default("Actief");
             $table->string("website");
             $table->string("instagram");
             $table->string("facebook");

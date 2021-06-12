@@ -16,6 +16,7 @@ class CreateKortingscodesTable extends Migration
         Schema::create('kortingscodes', function (Blueprint $table) {
             $table->id();
             $table->string("code");
+            $table->timestamps();
         });
     }
 

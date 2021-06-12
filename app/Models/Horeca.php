@@ -23,7 +23,7 @@ class Horeca extends Model
      * @var array
      */
     protected $fillable = [
-        'naam', 'email', 'logo', 'adres', 'instagram', 'facebook', 'website', 'walk_id'
+        'naam', 'email', 'logo', 'adres', 'instagram', 'status', 'facebook', 'website', 'walk_id'
     ];
 
     public function walk()
