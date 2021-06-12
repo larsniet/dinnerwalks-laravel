@@ -116,10 +116,8 @@ class ApiController extends Controller
 
         // Stripe sessie aanmaken en terug sturen naar de frontend
         return CheckoutSession::create([
-            'success_url' => 'http://localhost:3000?betaald=success',
-            'cancel_url' => 'http://localhost:3000?betaald=failure',
-            // 'success_url' => env('BETA_APP_URL').'?betaald=success?customer='.$customer->id,
-            // 'cancel_url' => env('BETA_APP_URL').'?betaald=failure',
+            'success_url' => env("FRONTEND_APP_URL", "https://beta.dinnerwalks.nl").'?betaald=success',
+            'cancel_url' => env("FRONTEND_APP_URL", "https://beta.dinnerwalks.nl").'?betaald=failure',
             'payment_method_types' => ['ideal'],
             'client_reference_id' => $boeking->id,
             'customer_email' => $customer->email,

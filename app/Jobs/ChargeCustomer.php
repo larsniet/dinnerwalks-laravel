@@ -45,8 +45,8 @@ class ChargeCustomer implements ShouldQueue
             $walk->aantal_geboekt = $walk->aantal_geboekt + 1;
             $walk->save();
 
-            $url = "http://localhost:3000/walks/$walk->locatie?code=$boeking->unieke_code";
-
+            $url = env("FRONTEND_APP_URL", "https://beta.dinnerwalks.nl")."/walks/$walk->locatie?code=$boeking->unieke_code";
+            
             Mail::to($boeking->customer->email)->send(new sendBoekingDetails($boeking->customer->naam, $boeking->customer->email, $boeking->datum, $boeking->kortingscode, $boeking->personen, $boeking->prijs, $url, $walk->locatie));
 
         } else {
