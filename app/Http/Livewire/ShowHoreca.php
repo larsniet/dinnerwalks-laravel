@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Horeca;
 use App\Models\Walk;
+use App\Models\User;
 
 class ShowHoreca extends Component
 {
@@ -21,7 +22,6 @@ class ShowHoreca extends Component
         'horecas.*.naam' => 'required',
         'horecas.*.email' => 'required',
         'horecas.*.adres' => 'required',
-        // 'horecas.*.logo' => 'required',
         'horecas.*.walk_id' => 'required',
         'horecas.*.status' => 'required'
     ];
@@ -42,6 +42,8 @@ class ShowHoreca extends Component
         if (!is_null($horeca)) {
             $editedHoreca = Horeca::find($horeca['id']);
             if ($editedHoreca) {
+                $user = User::where("horeca_id", $editedHoreca->id)->first();
+                $user->delete();
                 $editedHoreca->delete($horeca);
             }
         }
