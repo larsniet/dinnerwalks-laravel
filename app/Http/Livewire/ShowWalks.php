@@ -14,6 +14,11 @@ class ShowWalks extends Component
         $walk->delete();
     }
 
+    public function editWalk(Walk $walk)
+    {
+        $this->dispatchBrowserEvent('show-form');
+    }
+
     public function render()
     {
         $walks = Walk::all();
