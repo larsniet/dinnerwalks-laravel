@@ -2,8 +2,8 @@
     <div class="w-full overflow-x-auto">
         <form method="get">
             <label class="block text-sm mb-6">
-                <span class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">Naam, e-mail of telefoonnummer klant</span>
-                <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe" wire:model="term" type="text" />
+                <span class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">Zoek op naam, e-mail of telefoonnummer van klant</span>
+                <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Piet jan spitsvlek" wire:model="term" type="text" />
             </label>
             <span class="spinner mb-6" wire:loading></span>
             <table class="w-full whitespace-no-wrap">
