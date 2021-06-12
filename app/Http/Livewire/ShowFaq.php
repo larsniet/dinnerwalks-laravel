@@ -8,24 +8,32 @@ use Redirect;
 
 class ShowFaq extends Component
 {
-    public $vraag; 
-    public $antwoord;
+    public $editedFaqIndex = null;
+    public $faqs = [];
 
     protected $rules = [
-        'vraag' => 'required',
-        'antwoord' => 'required'
+        'faqs.*.vraag' => 'required',
+        'faqs.*.antwoord' => 'required'
     ];
-
-    public function remove(Faq $faq)
-    {
-        $faq->delete();
-    }
 
     public function render()
     {
+        $this->faqs = Faq::all()->toArray();
         return view('livewire.show-faq', [
-            'faqs' => Faq::all()
+            'faqs' => $this->faqs
         ]);
+    }
+
+    public function removeFaq($faqIndex)
+    {
+        $faq = $this->faqs[$faqIndex] ?? NULL;
+        if (!is_null($faq)) {
+            $editedFaq = Faq::find($faq['id']);
+            if ($editedFaq) {
+                $editedFaq->delete($faq);
+            }
+        }
+        $this->editedFaqIndex = null;
     }
 
     public function addFaq() 
@@ -42,15 +50,21 @@ class ShowFaq extends Component
     }
 
 
-    public function updateFaq(Faq $faq) 
+    public function editFaq($faqIndex) 
+    {
+        $this->editedFaqIndex = $faqIndex;
+    }
+
+    public function saveFaq($faqIndex) 
     {
         $this->validate();
-
-        $faq->vraag = $this->vraag;
-        $faq->antwoord = $this->antwoord;
-        $faq->save();
-
-        $this->emit('saved');
-        return Redirect::back();
+        $faq = $this->faqs[$faqIndex] ?? NULL;
+        if (!is_null($faq)) {
+            $editedFaq = Faq::find($faq['id']);
+            if ($editedFaq) {
+                $editedFaq->update($faq);
+            }
+        }
+        $this->editedFaqIndex = null;
     }
 }
