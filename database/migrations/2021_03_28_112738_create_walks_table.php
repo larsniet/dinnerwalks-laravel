@@ -16,7 +16,7 @@ class CreateWalksTable extends Migration
         Schema::create('walks', function (Blueprint $table) {
             $table->id();
             $table->string("locatie")->unique();
-            $table->string("beschrijving");
+            $table->longText("beschrijving");
             $table->float("prijs");
             $table->string("kortingscode")->unique();
             $table->binary("preview");
@@ -27,6 +27,7 @@ class CreateWalksTable extends Migration
             $table->binary("podcast3");
             $table->binary("podcast4");
             $table->binary("podcast5");
+            $table->binary("podcast6")->nullable();
 
             $table->integer("max_aantal_personen");
             $table->date("max_boekings_datum");

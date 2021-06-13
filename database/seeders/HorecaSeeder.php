@@ -16,113 +16,45 @@ class HorecaSeeder extends Seeder
     public function run()
     {
         DB::table('horecas')->insert([
-            'naam' => "Beach",
+            'naam' => "Grand Café Van Buuren",
             'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/beach.jpg",
-            "adres" => "Zeereep 102",
-            'website' => 'https://beachnoordwijk.nl/',
-            'instagram' => 'https://www.instagram.com/beachnoordwijk/',
-            'facebook' => 'https://www.facebook.com/beach.noordwijk',
+            'logo' => "storage/horeca_images/vanbuuren.jpg",
+            "adres" => "Stationsweg 7",
+            'website' => 'https://www.grandcafevanbuuren.nl/',
+            'instagram' => 'https://www.instagram.com/grandcafevanbuuren/',
+            'facebook' => 'https://www.facebook.com/GrandCafeVanBuuren',
+            'walk_id' => 1,
+        ]);
+        DB::table('horecas')->insert([
+            'naam' => "Aperitivo",
+            'email' => Str::random(10).'@gmail.com',
+            'logo' => "storage/horeca_images/aperitivo.jpg",
+            "adres" => "Breestraat 49",
+            'website' => 'http://www.aperitivoleiden.nl/',
+            'instagram' => 'https://www.instagram.com/aperitivoleiden/',
+            'facebook' => 'https://www.facebook.com/aperitivoleiden',
+            'walk_id' => 1,
+        ]);
+        DB::table('horecas')->insert([
+            'naam' => "Pakhuis",
+            'email' => Str::random(10).'@gmail.com',
+            'logo' => "storage/horeca_images/pakhuis.jpg",
+            "adres" => "Doelensteeg 8",
+            'website' => '=https://www.pakhuisleiden.nl/',
+            'instagram' => 'https://www.instagram.com/pakhuisleiden/',
+            'facebook' => 'https://www.facebook.com/pakhuisleiden',
+            'walk_id' => 1,
+        ]);
+        DB::table('horecas')->insert([
+            'naam' => "Buddhas",
+            'email' => Str::random(10).'@gmail.com',
+            'logo' => "storage/horeca_images/buddhas.png",
+            "adres" => "Botermarkt 20",
+            'website' => 'https://www.buddhas.nl/',
+            'instagram' => 'https://www.instagram.com/buddhasleiden/',
+            'facebook' => 'https://www.facebook.com/Buddhasleiden',
             'walk_id' => 1,
         ]);
 
-        DB::table('horecas')->insert([
-            'naam' => "Beachclub C",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/beachclubc.png",
-            "adres" => "Kon. Astrid Boulevard 104",
-            'website' => 'https://beachclubcnoordwijk.nl/',
-            'instagram' => 'https://www.instagram.com/beachclub.c.noordwijk/',
-            'facebook' => 'https://www.facebook.com/BeachclubC',
-            'walk_id' => 1,
-        ]);
-
-        DB::table('horecas')->insert([
-            'naam' => "Open Doors",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/opendoors.jpg",
-            "adres" => "De Grent 34",
-            'website' => 'https://open-doors.nl/',
-            'instagram' => 'https://www.instagram.com/opendoors_noordwijk/',
-            'facebook' => 'https://www.facebook.com/OpenDoorsNoordwijk',
-            'walk_id' => 1,
-        ]);
-
-        DB::table('horecas')->insert([
-            'naam' => "Pannekoekenhuisje",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/pannekoekenhuisje.png",
-            "adres" => "Kon. Wilhelmina Boulevard 15A-B",
-            'website' => 'https://www.hetpannekoekenhuisje.nl/',
-            'instagram' => 'https://www.instagram.com/pannekoekenhuisjenoordwijk/',
-            'facebook' => 'https://www.facebook.com/pannekoekenhuisjenoordwijk',
-            'walk_id' => 1,
-        ]);
-
-        DB::table('horecas')->insert([
-            'naam' => "Alexander Beach Club",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/alexander.png",
-            "adres" => "Koningin Wilhelmina Boulevard afrit 10",
-            'website' => 'https://www.alexanderbeach.nl/',
-            'instagram' => 'https://www.instagram.com/alexanderbeachclubnoordwijk/',
-            'facebook' => 'https://www.facebook.com/alexanderbeachclubnoordwijk',
-            'walk_id' => 1,
-        ]);
-
-        DB::table('horecas')->insert([
-            'naam' => "Palace Hotel",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/palace.png",
-            "adres" => "Pickeplein 8",
-            'website' => 'https://palacehotel.nl/',
-            'instagram' => 'https://www.instagram.com/hotelnoordwijk/',
-            'facebook' => 'https://www.facebook.com/PalaceHotelNoordwijk',
-            'walk_id' => 1,
-        ]);
-
-        DB::table('horecas')->insert([
-            'naam' => "Nani",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/nani.png",
-            "adres" => "Bomstraat 23",
-            'website' => 'https://naninoordwijk.sitedish.shop/',
-            'instagram' => 'https://www.instagram.com/naninoordwijk.nl/',
-            'facebook' => 'https://www.facebook.com/Naninoordwijk',
-            'walk_id' => 1,
-        ]);
-
-        DB::table('horecas')->insert([
-            'naam' => "Paal 14",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/paal14.png",
-            "adres" => "Boulevard Zeezijde 7",
-            'website' => 'https://paal14.nl/',
-            'instagram' => 'https://www.instagram.com/strandpaviljoenpaal14/',
-            'facebook' => 'https://www.facebook.com/Paal14',
-            'walk_id' => 2,
-        ]);
-
-        DB::table('horecas')->insert([
-            'naam' => "SandCbar",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/sandcbar.png",
-            "adres" => "Boulevard Zeezijde 43",
-            'website' => 'https://www.sandcbar.nl/',
-            'instagram' => 'https://www.instagram.com/sandcbar_katwijk/',
-            'facebook' => 'https://www.facebook.com/www.sandcbar.nl',
-            'walk_id' => 2,
-        ]);
-
-        DB::table('horecas')->insert([
-            'naam' => "Hotel Steeds aan zee",
-            'email' => Str::random(10).'@gmail.com',
-            'logo' => "storage/horeca_images/steedsaanzee.png",
-            "adres" => "Kon. Wilhelminastraat 14",
-            'website' => 'http://steedsaanzee.nl/grand-cafe-restraurant-de-koningin-katwijk/',
-            'instagram' => 'https://www.instagram.com/bar70.katwijk/',
-            'facebook' => 'https://www.facebook.com/Bar70Katwijk',
-            'walk_id' => 2,
-        ]);
     }
 }
