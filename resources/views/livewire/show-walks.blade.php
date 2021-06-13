@@ -93,6 +93,7 @@
                     <th class="px-4 py-3">Locatie</th>
                     <th class="px-4 py-3">Aantal keer geboekt</th>
                     <th class="px-4 py-3">Totale Omzet</th>
+                    <th class="px-4 py-3">Status</th>
                     <th class="px-4 py-3">Acties</th>
                 </tr>
             </thead>
@@ -118,11 +119,27 @@
                         <td class="px-4 py-3 text-xs">
                             € {{ $walk->omzet }}
                         </td>
+                        <td class="px-4 py-3 text-xs">
+                            @if ($walk->status === "Actief")
+                                    <a style="cursor: pointer" wire:click.prevent='toggleStatus({{ $walk }})'>
+                                        <span
+                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                        {{ $walk->status }}
+                                        </span>
+                                    </a>
+                                @else
+                                    <a style="cursor: pointer" wire:click.prevent='toggleStatus({{ $walk }})'>
+                                        <span
+                                            class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">
+                                            {{ $walk->status }}
+                                        </span>
+                                    </a>
+                                @endif
+                        </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
                                 <button
-                                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                    aria-label="Edit" wire:click.prevent="editWalk({{ $walk }})" >
+                                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit" wire:click.prevent="editWalk({{ $walk }})" >
                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">

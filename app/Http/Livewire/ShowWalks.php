@@ -96,6 +96,16 @@ class ShowWalks extends Component
         $this->closeModal();
     }
 
+    public function toggleStatus(Walk $walk)
+    {
+        if ($walk->status === "Actief") {
+            $walk->status = "Passief";
+        } else {
+            $walk->status = "Actief";
+        }
+        $walk->save();
+    }
+
     public function render()
     {
         $walks = Walk::all();        
