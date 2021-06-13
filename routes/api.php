@@ -19,6 +19,7 @@ use App\Http\Controllers\ApiController;
     
     Route::get('customers', [ApiController::class, 'getCustomers']);
     Route::get('walks', [ApiController::class, 'getWalks']);
+    Route::post('walk', [ApiController::class, 'getSingleWalk']);
     Route::get('faqs', [ApiController::class, 'getFaqs']);
     Route::get('horeca', [ApiController::class, 'getHoreca']);
     

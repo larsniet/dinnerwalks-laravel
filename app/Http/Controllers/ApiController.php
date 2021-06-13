@@ -19,7 +19,12 @@ class ApiController extends Controller
 {
     public function getWalks()
     {
-        return response()->json(Walk::all());
+        return response()->json(Walk::where('status', "Actief")->get());
+    }
+
+    public function getSingleWalk(Request $request)
+    {
+        return response()->json(Walk::where('locatie', $request->walkLocatie)->first());
     }
 
     public function getHoreca() 

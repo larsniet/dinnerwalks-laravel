@@ -31,6 +31,8 @@ class CreateWalksTable extends Migration
             $table->integer("max_aantal_personen");
             $table->date("max_boekings_datum");
 
+            $table->string("status");
+
             $table->integer("aantal_geboekt")->default(0);
             $table->float("omzet")->default(0);
 

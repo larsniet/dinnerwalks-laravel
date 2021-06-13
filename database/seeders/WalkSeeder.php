@@ -32,6 +32,7 @@ class WalkSeeder extends Seeder
 
             "max_aantal_personen" => 2,
             "max_boekings_datum" => date('Y-m-d', $date),
+            "status" => "Actief",
             "prijs" => 3.50
         ]);
         DB::table('walks')->insert([
@@ -49,6 +50,7 @@ class WalkSeeder extends Seeder
 
             "max_aantal_personen" => 2,
             "max_boekings_datum" => date('Y-m-d', $date),
+            "status" => "Actief",
             "prijs" => 3.50
         ]);
     }

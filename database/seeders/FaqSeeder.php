@@ -16,11 +16,11 @@ class FaqSeeder extends Seeder
     {
         DB::table('faqs')->insert([
             'vraag' => 'Wat zijn de kosten van de loop?',
-            'antwoord' => 'Dinnerwalks is een initiatief om de lokale horeca te steunen in deze moeilijke tijd. We proberen de kosten dan ook zo laag mogelijk te houden. We vragen u een eenmalige bijdrage van 3 euro voor de deelname, maar de kosten voor de gerechtjes bepalen de horecazaken zelf en betaalt u dus ook ter plekke. U bent uiteraard niet verplicht om bij elke zaak een gerechtje af te nemen.'
+            'antwoord' => 'Dinnerwalks is een initiatief om de lokale horeca te steunen in deze moeilijke tijd. We proberen de kosten dan ook zo laag mogelijk te houden. We vragen u een eenmalige bijdrage van €3.50 voor de deelname, maar de kosten voor de gerechtjes bepalen de horecazaken zelf en betaalt u dus ook ter plekke. U bent uiteraard niet verplicht om bij elke zaak een gerechtje af te nemen.'
         ]);
         DB::table('faqs')->insert([
             'vraag' => 'Hoe moet ik betalen voor de wandeling?',
-            'antwoord' => 'U maakt een reservering via het reserveringssysteem op onze website. Na u reservering ontvangt u een e-mail met daarin een betaalverzoek. Op het moment dat u dit betaalverzoek heeft betaald ontvangt u een betalingsbevestiging per mail (kan ook in spam terecht komen). Dit kan even duren. Betaalt u niet binnen 48 uur dan komt de reservering te vervallen.'
+            'antwoord' => 'U maakt een reservering via het reserveringssysteem op onze website. Na uw reservering ontvangt u een e-mail met daarin alle benodigde gegevens om uw wandeling een succes te maken.'
         ]);
         DB::table('faqs')->insert([
             'vraag' => 'Hoe ontvang ik alle informatie over de wandeling?',
@@ -32,11 +32,11 @@ class FaqSeeder extends Seeder
         ]);
         DB::table('faqs')->insert([
             'vraag' => 'Wanneer vinden de wandelingen plaats?',
-            'antwoord' => 'Onze wandelingen zijn elke zaterdag en zondag van 11:30 tot 17:30 en duren ongeveer 2 tot 2,5 uur. De wandeling begint en eindigt bij de vuurtoren in Noordwijk en gaat via het strand en de koningin Astrid Boulevard naar de Grent om uiteindelijk via de Hoofdstraat weer op de koningin Wilhelmina boulevard uit te komen'
+            'antwoord' => 'Onze wandelingen zijn elke zaterdag en zondag en duren ongeveer 2 tot 2,5 uur.'
         ]);
         DB::table('faqs')->insert([
             'vraag' => 'Wat zijn onze voorwaarden?',
-            'antwoord' => 'Wij kunnen het inschrijfgeld van 3 euro helaas niet teruggeven, omdat het onder elke weersomstandheid mogelijk is om de route te wandelen. Tenzij de wereld wordt veroverd door aliëns, dat is een ander verhaal. De code die u ontvangt is eenmalig en persoonsgebonden.'
+            'antwoord' => 'Wij kunnen het inschrijfgeld van €3.50 helaas niet teruggeven, omdat het onder elke weersomstandheid mogelijk is om de route te wandelen. Tenzij de wereld wordt veroverd door aliëns, dat is een ander verhaal. De code die u ontvangt is eenmalig en persoonsgebonden.'
         ]);
     }
 }
