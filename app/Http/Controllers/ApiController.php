@@ -105,8 +105,8 @@ class ApiController extends Controller
             'email' => $request->email
         ]);
 
-        // Aanmaken van kortingscode gebaseerd op huidige kortingscode, random int en ID
-        $kortingscode = $walk->kortingscode . '-' . random_int(0,9) . $customer->id;
+        // Aanmaken van kortingscode gebaseerd op aantal personen en customer id
+        $kortingscode = $walk->kortingscode . '-' . $request->aantalPersonen . $customer->id;
 
         // Aanmaken boeking
         $boeking = Boeking::create([
@@ -131,6 +131,7 @@ class ApiController extends Controller
             'line_items' => [$line_items],
         ]);        
     }
+    
     public function generateRandomString($length = 20) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);

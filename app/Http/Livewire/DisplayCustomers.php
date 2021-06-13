@@ -32,9 +32,9 @@ class DisplayCustomers extends Component
         $walk = Walk::where('id', $horecaOnderneming->walk_id)->first();
         $boekingen = Boeking::whereBetween('datum', [
             date('Y-m-d'),
-            date('Y-m-d', strtotime("+1 week"))])->paginate(10);
-        $boekingen = $boekingen->where('walk_id', '==', $walk->id);
-        $boekingen = $boekingen->where('status', "==", "Betaald");
+            date('Y-m-d', strtotime("+1 week"))])->get();
+        $boekingen = $boekingen->where('walk_id', $walk->id);
+        $boekingen = $boekingen->where('status', "Betaald")->sortBy('datum');
         
         return view('livewire.display-customers', [
             'customers' => $boekingen,

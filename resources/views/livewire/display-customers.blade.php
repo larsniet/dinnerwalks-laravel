@@ -1,4 +1,4 @@
-<div class="w-full overflow-hidden rounded-lg shadow-xs">
+<div class="w-full overflow-hidden rounded-lg shadow-xs mb-6">
     <div class="w-full overflow-x-auto">
         <form method="get">
             @if (Auth::user()->email === 'admin@dinnerwalks.nl')
