@@ -8,6 +8,18 @@
                 wire:model.defer="maxdate" />
             <x-input-error for="maxdate" class="mt-2" />
         </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="personen" value="Maximaal aantal personen" />
+            <x-input id="personen" type="text" class="block w-full mt-1" wire:model.defer="max_aantal_personen"/>
+            <x-input-error for="personen" class="mt-2" />
+        </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="kosten" value="Kosten per persoon" />
+            <x-input id="kosten" type="text" class="block w-full mt-1" wire:model.defer="prijs" />
+            <x-input-error for="kosten" class="mt-2" />
+        </div>
     </x-slot>
 
     <x-slot name="actions">

@@ -15,8 +15,6 @@ class AddWalk extends Component
 
     public $locatie;
     public $beschrijving;
-    public $kosten;
-    public $personen;
     public $preview;
     public $pdf;
 
@@ -29,8 +27,6 @@ class AddWalk extends Component
     protected $rules = [
         'locatie' => 'required|unique:walks',
         'beschrijving' => 'required|max:50',
-        'kosten' => 'required',
-        'personen' => 'required',
         'preview' => 'required',
         'pdf' => 'required',
         'podcast1' => 'required|max:40000',
@@ -64,22 +60,24 @@ class AddWalk extends Component
         $podcast4 = $this->podcast4->store('public/walks/'.$this->locatie.'/podcasts');
         $podcast5 = $this->podcast5->store('public/walks/'.$this->locatie.'/podcasts');
 
+        $randomWalk = Walk::where('id', 1)->first();
+
         Walk::create([
             'locatie' => $this->locatie,
             'beschrijving' => $this->beschrijving,
             'kortingscode' => $kortingscode,
-            'preview' => "storage/".trim($preview, "public/"),
-            'pdf' => "storage/".trim($pdf, "public/"),
+            'preview' => str_replace('public/', 'storage/', $preview),
+            'pdf' => str_replace('public/', 'storage/', $pdf),
 
-            'podcast1' => "storage/".trim($podcast1, "public/"),
-            'podcast2' => "storage/".trim($podcast2, "public/"),
-            'podcast3' => "storage/".trim($podcast3, "public/"),
-            'podcast4' => "storage/".trim($podcast4, "public/"),
-            'podcast5' => "storage/".trim($podcast5, "public/"),
+            'podcast1' => str_replace('public/', 'storage/', $podcast1),
+            'podcast2' => str_replace('public/', 'storage/', $podcast2),
+            'podcast3' => str_replace('public/', 'storage/', $podcast3),
+            'podcast4' => str_replace('public/', 'storage/', $podcast4),
+            'podcast5' => str_replace('public/', 'storage/', $podcast5),
 
-            "max_aantal_personen" => $this->personen,
+            "max_aantal_personen" => $randomWalk->max_aantal_personen,
             "max_boekings_datum" => Walk::all()->random()->max_boekings_datum,
-            "prijs" => $this->kosten
+            "prijs" => $randomWalk->prijs
         ]);
         $this->emit('saved');
         return Redirect::back();
