@@ -12,8 +12,8 @@ class ShowFaq extends Component
     public $faqs = [];
 
     protected $rules = [
-        'faqs.*.vraag' => 'required',
-        'faqs.*.antwoord' => 'required'
+        'faqs.*.question' => 'required',
+        'faqs.*.answer' => 'required'
     ];
 
     public function render()

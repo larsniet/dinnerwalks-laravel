@@ -7,12 +7,12 @@
         <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
             Horeca toevoegen
         </h4>
-        <livewire:add-horeca />
+        <livewire:add-catering />
 
         <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
             Alle horeca
         </h4>
-        <livewire:show-horeca />
+        <livewire:show-catering />
 
     </div>
 </x-app-layout>

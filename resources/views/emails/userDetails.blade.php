@@ -1,12 +1,12 @@
 @component('mail::message')
 <h1>
-Uw bedrijf <a href="{{ $link }}">{{ $naam }}</a> is aangemeld bij Dinnerwalks!
+Uw bedrijf <a href="{{ $link }}">{{ $companyName }}</a> is aangemeld bij Dinnerwalks!
 </h1>
 <h2>
 Locatie
 </h2>
 <p>
-{{ $locatie }}
+{{ $location }}
 </p>
 <h2>
 E-mail
@@ -34,7 +34,7 @@ bedoeld om makkelijk te kunnen checken hoeveel mensen op pad gaan/zijn en
 welke code ze van ons hebben gekregen.</p>
 
 <p>
-Super leuk dat {{ $naam }} zich heeft aangesloten bij Dinnerwalks en
+Super leuk dat {{ $companyName }} zich heeft aangesloten bij Dinnerwalks en
 we hopen dat jullie er nog veel profijt van zullen hebben!</p>
 
 <p style="font-size: 14px">

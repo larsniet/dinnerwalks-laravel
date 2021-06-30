@@ -5,86 +5,92 @@ namespace App\Http\Livewire;
 use Livewire\WithFileUploads;
 use Livewire\Component;
 use App\Models\Walk;
-use App\Models\Team;
-use App\Models\Kortingscode;
+use App\Models\Location;
+use App\Models\DiscountCode;
+use App\Models\Podcast;
 use Redirect;
 
 class AddWalk extends Component
 {
     use WithFileUploads;
 
-    public $locatie;
-    public $beschrijving;
+    public $location_id;
+    public $name;
+    public $description;
     public $preview;
     public $pdf;
-
-    public $podcast1;
-    public $podcast2;
-    public $podcast3;
-    public $podcast4;
-    public $podcast5;
+    public $inputFields;
+    public $podcast;
 
     protected $rules = [
-        'locatie' => 'required|unique:walks',
-        'beschrijving' => 'required|max:50',
+        'location_id' => 'required',
+        'name' => 'required',
+        'description' => 'required|max:50',
         'preview' => 'required',
         'pdf' => 'required',
-        'podcast1' => 'required|max:40000',
-        'podcast2' => 'required|max:40000',
-        'podcast3' => 'required|max:40000',
-        'podcast4' => 'required|max:40000',
-        'podcast5' => 'required|max:40000',
+        'inputFields' => 'required',
+        'podcast.*' => 'max:40000',
     ];
 
     public function addWalk()
     {
         $this->validate();    
         
-        $kortingscodes = Kortingscode::all()->random(20);
+        $kortingscodes = DiscountCode::all()->random(20);
         $walks = Walk::all();
         $kortingscode = "";
         foreach ($walks as $walk) {
             foreach ($kortingscodes as $code) {
                 if ($walk->kortingscode !== $code->code) {
-                    $kortingscode = $code->code;
+                    $kortingscode = $code;
                 }
             }
         }
 
-        $preview = $this->preview->store('public/walks/'.$this->locatie);
-        $pdf = $this->pdf->store('public/walks/'.$this->locatie);
+        $this->name = strtolower($this->name);
 
-        $podcast1 = $this->podcast1->store('public/walks/'.$this->locatie.'/podcasts');
-        $podcast2 = $this->podcast2->store('public/walks/'.$this->locatie.'/podcasts');
-        $podcast3 = $this->podcast3->store('public/walks/'.$this->locatie.'/podcasts');
-        $podcast4 = $this->podcast4->store('public/walks/'.$this->locatie.'/podcasts');
-        $podcast5 = $this->podcast5->store('public/walks/'.$this->locatie.'/podcasts');
+        $preview = $this->preview->store('public/walks/'.Location::where('id', $this->location_id)->first()->name.$this->name);
+        $pdf = $this->pdf->store('public/walks/'.Location::where('id', $this->location_id)->first()->name.$this->name);
 
         $randomWalk = Walk::where('id', 1)->first();
 
-        Walk::create([
-            'locatie' => $this->locatie,
-            'beschrijving' => $this->beschrijving,
-            'kortingscode' => $kortingscode,
+        $walk = Walk::create([
+            'name' => $this->name,
+            'location_id' => $this->location_id,
+            'discount_code_id' => $kortingscode->id,
+            'description' => $this->description,
             'preview' => str_replace('public/', 'storage/', $preview),
             'pdf' => str_replace('public/', 'storage/', $pdf),
+            'status' => "Active",
 
-            'podcast1' => str_replace('public/', 'storage/', $podcast1),
-            'podcast2' => str_replace('public/', 'storage/', $podcast2),
-            'podcast3' => str_replace('public/', 'storage/', $podcast3),
-            'podcast4' => str_replace('public/', 'storage/', $podcast4),
-            'podcast5' => str_replace('public/', 'storage/', $podcast5),
-
-            "max_aantal_personen" => $randomWalk->max_aantal_personen,
-            "max_boekings_datum" => Walk::all()->random()->max_boekings_datum,
-            "prijs" => $randomWalk->prijs
+            "max_people" => $randomWalk->max_people,
+            "max_booking_date" => Walk::all()->random()->max_booking_date,
+            "price" => $randomWalk->price
         ]);
+
+        if ($this->podcast) {
+            foreach ($this->podcast as $key => $pod) {
+                $podcast = $pod->store('public/walks/'. $walk->location->name . $walk->name.'/podcasts');
+                Podcast::create([
+                    'walk_id' => $walk->id, 
+                    'stored_location' => 'storage/walks/' . $walk->location->name . $walk->name . '/podcasts/' . $podcast
+                ]);
+            }
+        }
+
         $this->emit('saved');
         return Redirect::back();
     }
 
+    public function updatedInputFields($value)
+    {
+        $this->inputFields = intval($value);
+    }
+
     public function render()
     {
-        return view('livewire.add-walk');
+        return view('livewire.add-walk', [
+            'locations' => Location::all()
+        ]);
     }
 }

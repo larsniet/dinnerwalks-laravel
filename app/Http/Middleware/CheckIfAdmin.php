@@ -17,7 +17,7 @@ class CheckIfAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->email === "admin@dinnerwalks.nl") {
+        if (Auth::user()->roles[0]->name === "admin") {
             return $next($request);
         }
         else {return abort(401);}

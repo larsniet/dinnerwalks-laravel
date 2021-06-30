@@ -1,26 +1,21 @@
 @component('mail::message')
 <h2>Hi wandelaar!</h2>
 
-<p>Hopelijk heb je een beetje zin in de wandeling, horeca <span style="text-transform: capitalize">{{ $plaats }}</span> kan in ieder geval niet wachten om jou te ontvangen! De wandeling die je hebt geboekt vindt plaats op {{ $datum }} en is voor {{ $personen }}
+<p>Hopelijk heb je een beetje zin in de wandeling, horeca <span style="text-transform: capitalize">{{ substr($plaats, 0, strpos($plaats, " Cocktail")); }}</span> kan in ieder geval niet wachten om jou te ontvangen! De wandeling die je hebt geboekt vindt plaats op {{ $datum }} en is voor {{ $personen }}
 @if ($personen === 1)
 persoon.
 @else
 personen.
 @endif
-Hierbij ontvang je de link naar het document met alle informatie en onze speciale <span style="text-transform: capitalize">{{ $plaats }}</span>-podcast. </p>
+Hierbij ontvang je de link naar het document met alle informatie.</p>
 
 <p>Je loopt de wandeling zelfstandig, er is dus niemand van Dinnerwalks aanwezig. In verband met de openingstijden van de horeca kun je starten tussen 13:50 en 15:50. Zie het document voor verdere informatie!</p>
 
 <p><b>JOUW UNIEKE CODE:</b></p>
 <h3>{{ $kortingscode }}</h3>
 
-<p><b>LINK NAAR DE PODCAST EN HET DOCUMENT MET INFO:</b></p>
+<p><b>LINK NAAR HET DOCUMENT MET INFO:</b></p>
 <p>{{ $url }}</p>
-
-<p><b>PODCAST (bij een culinaire walk)</b></p>
-<p>Als extraatje heb je de mogelijkheid om, vooraf, tijdens of na de wandeling, te luisteren naar onze speciale <span style="text-transform: capitalize">{{ $plaats }}</span>-podcast. De podcast blijft te beluisteren terwijl je het document met de route opent.</p>
-
-<p>Vind je het niet fijn om met de podcast te lopen? Geen probleem! De route en alle bezienswaardigheden staan ook volledig in het document uitgeschreven, dus alleen met het document lopen is ook een goede optie.</p>
 
 <p><b>SPELLETJES (bij een cocktail walk)</b></p>
 <p>Als extraatje heb je de mogelijkheid om spelletjes te spelen tijdens het nuttigen van de cocktails. Deze vind je onderaan het document!</p>

@@ -3,26 +3,26 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Kortingscode;
+use App\Models\DiscountCode;
 use Redirect;
 
 class ShowCodes extends Component
 {
-    public $kortingscode;
+    public $discountCode;
 
     protected $rules = [
-        'kortingscode' => 'required',
+        'discountCode' => 'required',
     ];
 
-    public function remove(Kortingscode $kortingscode)
+    public function remove(DiscountCode $discountCode)
     {
-        $kortingscode->delete();
+        $discountCode->delete();
     }
 
     public function render()
     {
         return view('livewire.show-codes', [
-            'kortingscodes' => Kortingscode::where('id', '!=', null)->orderBy("code")->paginate(30)
+            'discountCodes' => DiscountCode::where('id', '!=', null)->orderBy("code")->paginate(30)
         ]);
     }
 
@@ -30,8 +30,8 @@ class ShowCodes extends Component
     {
         $this->validate();
 
-        Kortingscode::create([
-            'code' => $this->kortingscode,
+        DiscountCode::create([
+            'code' => $this->discountCode,
         ]);
 
         $this->emit('saved');

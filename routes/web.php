@@ -32,7 +32,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Niet toegankelijk voor Horeca
     Route::group(['middleware' => CheckIfAdmin::class], function () {
         Route::view('walk', 'walk')->name('walk');
-        Route::view('horeca', 'horeca')->name('horeca');
+        Route::view('locations', 'locations')->name('locations');
+        Route::view('catering', 'catering')->name('catering');
         Route::view('kortingscodes', 'kortingscodes')->name('kortingscodes');
         Route::view('faq', 'faq')->name('faq');
 

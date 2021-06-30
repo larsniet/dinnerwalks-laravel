@@ -22,7 +22,7 @@ class Faq extends Model
     * @var array
     */
    protected $fillable = [
-       'vraag', 'antwoord'
+       'question', 'answer'
    ];
 
 }

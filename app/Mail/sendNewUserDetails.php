@@ -12,9 +12,9 @@ class sendNewUserDetails extends Mailable
     use Queueable, SerializesModels;
 
     public $userName;
-    public $naam;
+    public $companyName;
     public $email;
-    public $locatie;
+    public $location;
     public $password;
     public $link;
 
@@ -23,12 +23,12 @@ class sendNewUserDetails extends Mailable
      *
      * @return void
      */
-    public function __construct($userName, $naam, $email, $locatie, $password, $link)
+    public function __construct($userName, $companyName, $email, $location, $password, $link)
     {
         $this->userName = $userName;
-        $this->naam = $naam;
+        $this->companyName = $companyName;
         $this->email = $email;
-        $this->locatie = $locatie;
+        $this->location = $location;
         $this->password = $password;
         $this->link = $link;
     }

@@ -21,7 +21,7 @@ class Walk extends Model
      *
      * @var array
      */
-    protected $dates = ['max_boekings_datum'];
+    protected $dates = ['max_booking_date'];
 
     /**
      * The attributes that are mass assignable.
@@ -29,18 +29,28 @@ class Walk extends Model
      * @var array
      */
     protected $fillable = [
-        'locatie', 'beschrijving', "prijs", "kortingscode", "preview", "pdf", "podcast1", "podcast2", "podcast3", "podcast4", "podcast5", "max_aantal_personen", "max_boekings_datum", "aantal_geboekt", "omzet"
+        'name', 
+        'description', 
+        'location_id',
+        'discount_code_id',
+        "price", 
+        "preview", 
+        "pdf", 
+        "max_people", 
+        "max_booking_date", 
+        "amount_booked", 
+        "revenue",
+        "status"
     ];
 
-    public function boeking() 
+    public function location()
     {
-        return $this->hasOne(Boeking::class, 'walk_id');
-    }   
+        return $this->belongsTo(Location::class);
+    }
 
-    public function horeca()
+    public function discountcode()
     {
-        return $this->hasMany(Horeca::class, 'walk_id');
+        return $this->belongsTo(DiscountCode::class, 'discount_code_id');
     }
 
 }
-

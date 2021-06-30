@@ -15,14 +15,14 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string("naam");
+            $table->string("name");
             $table->string("email");
-            $table->string("telefoonnummer");
+            $table->string("phone");
             $table->timestamps();
         });
 
         DB::statement(
-            'ALTER TABLE customers ADD FULLTEXT fulltext_index(naam, email, telefoonnummer)'
+            'ALTER TABLE customers ADD FULLTEXT fulltext_index(name, email, phone)'
         );
     }
 

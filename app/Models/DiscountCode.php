@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Walk;
 
-class Horeca extends Model
+class DiscountCode extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'horecas';
+    protected $table = 'discount_codes';
 
     /**
      * The attributes that are mass assignable.
@@ -23,11 +23,10 @@ class Horeca extends Model
      * @var array
      */
     protected $fillable = [
-        'naam', 'email', 'logo', 'adres', 'instagram', 'status', 'facebook', 'website', 'walk_id'
+        'code'
     ];
 
-    public function walk()
-    {
-        return $this->belongsTo(Walk::class);
-    }
+    // public function walk() {
+    //     return $this->belongsTo(Walk::class, 'discount_code_id');
+    // }
 }

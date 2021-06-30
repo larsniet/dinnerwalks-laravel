@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Walk;
 use DB;
 
-class KortingscodeSeeder extends Seeder
+class DiscountCodeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,11 +17,11 @@ class KortingscodeSeeder extends Seeder
     {
         $file = public_path('storage/vissen.csv');
         $codes = $this->readCSV($file, array('delimiter' => ','));
-    
+
         for ($i = 0; $i < count($codes); $i ++)
         {
-            DB::table('kortingscodes')->insert([
-                'code' => $codes[$i][0],
+            DB::table('discount_codes')->insert([
+                'code' => $codes[$i][0]
             ]);
         }
     }

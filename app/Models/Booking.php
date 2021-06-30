@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Walk;
 use App\Models\Customer;
+use App\Models\DiscountCode;
 
-class Boeking extends Model
+class Booking extends Model
 {
     use HasFactory;
     use Search;
@@ -17,7 +18,7 @@ class Boeking extends Model
      *
      * @var string
      */
-    protected $table = 'boekingen';
+    protected $table = 'bookings';
 
 
     /**

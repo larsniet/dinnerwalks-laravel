@@ -1,14 +1,28 @@
-<x-form-section submit="addHoreca">
+<x-form-section submit="addCatering">
     <x-slot name="form">
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="location_id" value="Locatie" />
+            <select id="location_id" wire:model.defer="location_id"
+                class='block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input'
+                style="text-transform: capitalize">
+                <option value="" selected>Kies een locatie</option>
+                @foreach ($locations as $w)
+                    <option value="{{ $w->id }}">{{ $w->name }}</option>
+                @endforeach
+            </select>
+            <x-input-error for="location_id" class="mt-2" />
+        </div>
+
         <div class="col-span-6 sm:col-span-4">
             <x-label for="userName" value="Naam contactpersoon" />
             <x-input id="userName" type="text" class="block w-full mt-1" wire:model.defer="userName"
                 placeholder="Pieter Dirksen" />
             <x-input-error for="userName" class="mt-2" />
         </div>
+
         <div class="col-span-6 sm:col-span-4">
             <x-label for="naam" value="Naam bedrijf" />
-            <x-input id="naam" type="text" class="block w-full mt-1" wire:model.defer="naam"
+            <x-input id="naam" type="text" class="block w-full mt-1" wire:model.defer="companyName"
                 placeholder="Het leukste bedrijf ooit" />
             <x-input-error for="naam" class="mt-2" />
         </div>
@@ -27,10 +41,10 @@
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="adres" value="Adres" />
-            <x-input id="adres" type="text" class="block w-full mt-1" wire:model.defer="adres"
+            <x-label for="address" value="Adres" />
+            <x-input id="address" type="text" class="block w-full mt-1" wire:model.defer="address"
                 placeholder="Grote Zeeweg 123" />
-            <x-input-error for="adres" class="mt-2" />
+            <x-input-error for="address" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
@@ -78,18 +92,6 @@
             <x-input-error for="website" class="mt-2" />
         </div>
 
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="walk" value="Walk" />
-            <select id="walk" wire:model.defer="walk"
-                class='block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input'
-                style="text-transform: capitalize">
-                <option value="" selected>Kies een walk</option>
-                @foreach ($walks as $w)
-                    <option value="{{ $w }}">{{ $w }}</option>
-                @endforeach
-            </select>
-            <x-input-error for="walk" class="mt-2" />
-        </div>
     </x-slot>
 
     <x-slot name="actions">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBoekingenTable extends Migration
+class CreateBookingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,21 @@ class CreateBoekingenTable extends Migration
      */
     public function up()
     {
-        Schema::create('boekingen', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->date("datum", $precision = 0);
-            $table->string("kortingscode");
-            $table->string("unieke_code")->unique();
-            $table->integer("personen");
-            $table->float("prijs_boeking");
-            $table->string("status")->default("Afgebroken");
-            
+
             $table->unsignedBigInteger("walk_id");
             $table->foreign('walk_id')->references('id')->on('walks');
 
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
+
+            $table->date("date", $precision = 0);
+            $table->string("unique_code")->unique();
+            $table->string("discount_code")->unique()->nullable();
+            $table->integer("amount_persons");
+            $table->float("price");
+            $table->string("status")->default("Afgebroken");
             
             $table->timestamps();
         });
@@ -39,6 +40,6 @@ class CreateBoekingenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('boekingen');
+        Schema::dropIfExists('bookings');
     }
 }

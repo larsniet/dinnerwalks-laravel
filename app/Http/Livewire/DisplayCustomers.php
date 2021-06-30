@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Walk;
-use App\Models\Boeking;
+use App\Models\Booking;
 use App\Models\Horeca;
 use Auth;
 use Date;
@@ -30,11 +30,11 @@ class DisplayCustomers extends Component
 
         $horecaOnderneming = Horeca::where('id', Auth::user()->id)->first();
         $walk = Walk::where('id', $horecaOnderneming->walk_id)->first();
-        $boekingen = Boeking::whereBetween('datum', [
+        $boekingen = Booking::whereBetween('date', [
             date('Y-m-d'),
             date('Y-m-d', strtotime("+1 week"))])->get();
         $boekingen = $boekingen->where('walk_id', $walk->id);
-        $boekingen = $boekingen->where('status', "Betaald")->sortBy('datum');
+        $boekingen = $boekingen->where('status', "Betaald")->sortBy('date');
         
         return view('livewire.display-customers', [
             'customers' => $boekingen,

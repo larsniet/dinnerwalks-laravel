@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Boeking;
+use App\Models\Booking;
 use Laravel\Cashier\Billable;
 use App\Models\Search;
 
@@ -27,18 +27,20 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'naam', 'email', 'telefoonnummer'
+        'name',
+        'email',
+        'phone'
     ];
 
     protected $searchable = [
-        'naam',
+        'name',
         'email',
-        'telefoonnummer'
+        'phone'
     ];
 
-    public function boeking() 
+    public function booking() 
     {
-        return $this->hasOne(Boeking::class, 'customer_id');
+        return $this->hasOne(Booking::class, 'customer_id');
     }   
 
 }

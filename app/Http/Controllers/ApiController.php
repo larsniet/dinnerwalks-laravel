@@ -141,4 +141,16 @@ class ApiController extends Controller
         }
         return $randomString;
     }
+
+    // public function sendData(Request $request)
+    // {
+    //     $user = Auth::user();
+    //     $catering = $user->catering;
+    //     $client = new Client;
+    //     $response = $client->post('https://somewhere.com/api/thing', ['user_details' => $user, 'catering' => $catering]);
+    // }
+    // public function retrieveData(Request $request)
+    // {
+    //     $request->user_details->email;
+    // }
 }

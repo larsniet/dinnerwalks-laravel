@@ -5,7 +5,9 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Walk;
-use App\Models\Boeking;
+use App\Models\Booking;
+use App\Models\Podcast;
+use App\Models\Location;
 use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Facades\Storage;
 
@@ -13,9 +15,25 @@ class ShowWalks extends Component
 {
     use WithFileUploads;
 
-    public $locatie, $beschrijving, $preview, $pdf, $podcast1, $podcast2, $podcast3, $podcast4, $podcast5;
+    public $location_id;
+    public $name;
+    public $description;
+    public $preview;
+    public $pdf;
+    public $inputFields;
+    public $podcast;
     public $currentWalkId;
     public $isOpen = false;
+
+    protected $rules = [
+        'location_id' => 'required',
+        'name' => 'required',
+        'description' => 'required|max:2000',
+        'preview' => 'required',
+        'pdf' => 'required',
+        'inputFields' => 'required',
+        'podcast.*' => 'max:40000',
+    ];
 
     public function openModal()
     {
@@ -25,71 +43,78 @@ class ShowWalks extends Component
     public function closeModal()
     {
         $this->isOpen = false;
+        $this->inputFields = 0;
     }
 
     public function remove(Walk $walk)
     {
-        Boeking::where("walk_id", $walk->id)->delete();
+        Storage::deleteDirectory("public/walks/".$walk->location->name.$walk->name);
+        Podcast::where('walk_id', $walk->id)->delete();
+        Booking::where("walk_id", $walk->id)->delete();
         $walk->delete();
     }
 
     public function editWalk(Walk $walk)
     {
         $this->currentWalkId = $walk->id;
-        $this->locatie = $walk->locatie;
-        $this->beschrijving = $walk->beschrijving;
+        $this->location_id = $walk->location_id;
+        $this->name = $walk->name;
+        $this->description = $walk->description;
         $this->preview = $walk->preview;
         $this->pdf = $walk->pdf;
-        $this->podcast1 = $walk->podcast1;
-        $this->podcast2 = $walk->podcast2;
-        $this->podcast3 = $walk->podcast3;
-        $this->podcast4 = $walk->podcast4;
-        $this->podcast5 = $walk->podcast5;
+
+        $podcasts = Podcast::where('walk_id', $walk->id)->get();
+        foreach ($podcasts as $key => $podcast) {
+            $this->inputFields += 1;
+        }
+
         $this->openModal();
     }
 
     public function saveWalk($walkID)
     {
+        $this->validate();   
+
         $walk = Walk::where('id', $walkID)->first();
-        $this->locatie = strtolower($this->locatie);
-        $walk->locatie = $this->locatie;
-        $walk->beschrijving = $this->beschrijving;
+        $walk->name = strtolower($this->name);
+        $walk->description = $this->description;
 
         if ($this->preview !== $walk->preview) {  
             Storage::delete(str_replace('storage/', 'public/', $walk->preview));
-            $preview = $this->preview->store('public/walks/'.$this->locatie);
+            $preview = $this->preview->store('public/walks/'.$walk->location->name.$walk->name);
             $walk->preview = str_replace('public/', 'storage/', $preview);
         }
         if ($this->pdf !== $walk->pdf) {
             Storage::delete(str_replace('storage/', 'public/', $walk->pdf));
-            $pdf = $this->pdf->store('public/walks/'.$this->locatie);
+            $pdf = $this->pdf->store('public/walks/'.$walk->location->name.$walk->name);
             $walk->pdf = str_replace('public/', 'storage/', $pdf);
         }
 
-        if ($this->podcast1 !== $walk->podcast1) {
-            Storage::delete(str_replace('storage/', 'public/', $walk->podcast1));
-            $podcast1 = $this->podcast1->store('public/walks/'.$this->locatie.'/podcasts');
-            $walk->podcast1 = str_replace('public/', 'storage/', $podcast1);
-        }
-        if ($this->podcast2 !== $walk->podcast2) {
-            Storage::delete(str_replace('storage/', 'public/', $walk->podcast2));
-            $podcast2 = $this->podcast2->store('public/walks/'.$this->locatie.'/podcasts');
-            $walk->podcast2 = str_replace('public/', 'storage/', $podcast2);
-        }
-        if ($this->podcast3 !== $walk->podcast3) {
-            Storage::delete(str_replace('storage/', 'public/', $walk->podcast3));
-            $podcast3 = $this->podcast3->store('public/walks/'.$this->locatie.'/podcasts');
-            $walk->podcast3 = str_replace('public/', 'storage/', $podcast3);
-        }
-        if ($this->podcast4 !== $walk->podcast4) {
-            Storage::delete(str_replace('storage/', 'public/', $walk->podcast4));
-            $podcast4 = $this->podcast4->store('public/walks/'.$this->locatie.'/podcasts');
-            $walk->podcast4 = str_replace('public/', 'storage/', $podcast4);
-        }
-        if ($this->podcast5 !== $walk->podcast5) {
-            Storage::delete(str_replace('storage/', 'public/', $walk->podcast5));
-            $podcast5 = $this->podcast5->store('public/walks/'.$this->locatie.'/podcasts');
-            $walk->podcast5 = str_replace('public/', 'storage/', $podcast5);
+        // Als er wel bestanden zijn ingevuld
+        if ($this->podcast !== null) {
+            // Check dan of de walk al podcasts heeft
+            if (Podcast::where('walk_id', $walk->id)->get()) {
+                // Heeft de walk al podcasts, verwijder ze dan
+                Podcast::where('walk_id', $walk->id)->delete();
+                Storage::deleteDirectory("public/walks/".$walk->location->name.$walk->name.'/podcasts');
+            }
+            // Loop door alle podcasts die binnen zijn gekomen
+            foreach ($this->podcast as $key => $pod) {
+                // En sla ze op
+                $podcast = $pod->store('public/walks/'. $walk->location->name . $walk->name.'/podcasts');
+                Podcast::create([
+                    'walk_id' => $walk->id, 
+                    'stored_location' => 'storage/walks/' . $walk->location->name . $walk->name . '/podcasts/' . $podcast
+                ]);
+            }
+        } else {
+            // Als er 0 is geselecteerd of er geen bestanden zijn ingevuld
+            // Check dan of de walk podcasts heeft
+            if (Podcast::where('id', $walk->id)->get()) {
+                // Heeft de walk podcasts, verwijder ze dan
+                Podcast::where('walk_id', $walk->id)->delete();
+                Storage::deleteDirectory("public/walks/".$walk->location->name.$walk->name.'/podcasts');
+            }
         }
 
         $walk->save();
@@ -98,10 +123,10 @@ class ShowWalks extends Component
 
     public function toggleStatus(Walk $walk)
     {
-        if ($walk->status === "Actief") {
-            $walk->status = "Passief";
+        if ($walk->status === "Active") {
+            $walk->status = "Passive";
         } else {
-            $walk->status = "Actief";
+            $walk->status = "Active";
         }
         $walk->save();
     }
@@ -111,6 +136,7 @@ class ShowWalks extends Component
         $walks = Walk::all();        
         return view('livewire.show-walks', [
             "walks" => $walks,
+            'locations' => Location::all()
         ]);
     }
 }

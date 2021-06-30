@@ -9,17 +9,17 @@ use Redirect;
 
 class GlobalWalks extends Component
 {
-    public $maxdate;
-    public $max_aantal_personen;
-    public $prijs;
+    public $max_booking_date;
+    public $max_people;
+    public $price;
 
     public function editWalks() 
     {
         $walks = Walk::all();
         foreach($walks as $walk) {
-            $walk->max_boekings_datum = DateTime::createFromFormat('Y-m-d', $this->maxdate);
-            $walk->max_aantal_personen = $this->max_aantal_personen;
-            $walk->prijs = $this->prijs;
+            $walk->max_booking_date = DateTime::createFromFormat('Y-m-d', $this->max_booking_date);
+            $walk->max_people = $this->max_people;
+            $walk->price = $this->price;
             $walk->save();
         }
         $this->emit('saved');
@@ -29,9 +29,9 @@ class GlobalWalks extends Component
     public function render()
     {
         $walk = Walk::where('id', 1)->first();
-        $this->maxdate = $walk->max_boekings_datum->format("Y-m-d");
-        $this->max_aantal_personen = $walk->max_aantal_personen;
-        $this->prijs = $walk->prijs;
+        $this->max_booking_date = $walk->max_booking_date->format("Y-m-d");
+        $this->max_people = $walk->max_people;
+        $this->price = $walk->price;
         return view('livewire.global-walks');
     }
 }

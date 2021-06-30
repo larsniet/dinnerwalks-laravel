@@ -7,10 +7,14 @@ use App\Models\User;
 use App\Models\Team;
 use App\Models\Walk;
 use App\Models\Customer;
-use App\Models\Boeking;
+use App\Models\Booking;
 use Database\Seeders\HorecaSeeder;
 use Database\Seeders\WalkSeeder;
-use Database\Seeders\KortingscodeSeeder;
+use Database\Seeders\DiscountCodeSeeder;
+use Database\Seeders\LocationSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\PodcastSeeder;
+use Database\Seeders\UserRoleSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,19 +25,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create();
-        Team::factory()->create();
+        User::factory()->count(20)->create();
         $this->call([
-            KortingscodeSeeder::class,
+            LocationSeeder::class,
+            DiscountCodeSeeder::class,
             WalkSeeder::class,
-            HorecaSeeder::class,
+            CateringSeeder::class,
+            UserSeeder::class,
             FaqSeeder::class,
+            PodcastSeeder::class,
+            RoleSeeder::class,
+            UserRoleSeeder::class
         ]);
-        Customer::factory()->count(400)
-                ->hasBoeking(1, function (array $attributes, Customer $customer) {
-                    return ['customer_id' => $customer->id];
-                })
-                ->create();
 
+        $customers = Customer::factory()
+            ->count(100)
+            ->create();
+        foreach ($customers as $key => $customer) {
+            Booking::factory()
+                ->count(1)
+                ->for($customer)
+                ->create();
+        }
+
+        $bookings = Booking::all();
+        foreach ($bookings as $key => $booking) {
+            $booking->discount_code = $booking->walk->discountcode->code . '-' . $booking->walk->id . $booking->customer->id;
+            $booking->save();
+        }
     }
 }

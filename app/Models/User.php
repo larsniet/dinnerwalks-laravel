@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Passport\HasApiTokens;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -55,4 +56,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+	/*
+     * The roles that belong to this user
+    */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles');
+    }
+
+    public function catering()
+    {
+        return $this->hasOne(Catering::class);
+    }
 }

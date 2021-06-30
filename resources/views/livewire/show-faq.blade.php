@@ -29,19 +29,19 @@
                                     <div class="flex items-center text-sm">
                                         <div>
                                             <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                {{ substr($faq['vraag'], 0, 30) }}...
+                                                {{ substr($faq['question'], 0, 30) }}...
                                             </p>
                                         </div>
                                     </div>
                                 @else 
-                                    <x-input type="text" class="block w-full mt-1" wire:model.defer="faqs.{{ $index }}.vraag" placeholder="Hoe lang is een Chinees?" />
+                                    <x-input type="text" class="block w-full mt-1" wire:model.defer="faqs.{{ $index }}.question" placeholder="Hoe lang is een Chinees?" />
                                 @endif
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 @if ($editedFaqIndex !== $index)
-                                    {{ substr($faq['antwoord'], 0, 80) }}...
+                                    {{ substr($faq['answer'], 0, 80) }}...
                                 @else
-                                    <x-input type="text" class="block w-full mt-1" wire:model.defer="faqs.{{ $index }}.antwoord" placeholder="Hu, Lang? Ik snap hem nog steeds niet." />
+                                    <x-input type="text" class="block w-full mt-1" wire:model.defer="faqs.{{ $index }}.answer" placeholder="Hu, Lang? Ik snap hem nog steeds niet." />
                                 @endif
                             </td>
                             <td class="px-4 py-3">

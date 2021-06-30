@@ -68,6 +68,6 @@ class sendBoekingDetails extends Mailable
     public function build()
     {
         return $this->markdown('emails.sendBoekingDetails')
-                    ->subject("Uw boeking bij Dinnerwalks");
+                    ->subject("Uw boeking is geslaagd");
     }
 }

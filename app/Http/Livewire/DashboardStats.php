@@ -4,17 +4,17 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Customer;
-use App\Models\Boeking;
+use App\Models\Booking;
 
 class DashboardStats extends Component
 {
     public function render()
     {
-        $boekingen = Boeking::all();
+        $boekingen = Booking::all();
         $omzet = 0;
         foreach ($boekingen as $key => $boeking) {
             if ($boeking->status === "Betaald") {
-                $omzet += $boeking->prijs_boeking;
+                $omzet += $boeking->price;
             }
         }
         $afgerondeTransacties = $boekingen->where('status', '==', 'Betaald');
