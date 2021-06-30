@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Validator;
 use Stripe\Checkout\Session as CheckoutSession;
 use App\Mail\sendContactForm;
 use App\Models\Customer;
-use App\Models\Boeking;
+use App\Models\Booking;
+use App\Models\Location;
 use App\Models\Walk;
 use App\Models\Faq;
-use App\Models\Kortingscode;
-use App\Models\Horeca;
+use App\Models\DiscountCode;
+use App\Models\Catering;
 use DateTime;
 use Mail;
 
@@ -19,7 +20,10 @@ class ApiController extends Controller
 {
     public function getWalks()
     {
-        return response()->json(Walk::where('status', "Actief")->get());
+        return response()->json([
+            "walks" => Walk::where('status', "Active")->get(),
+            "locations" => Location::all()
+        ]);
     }
 
     public function getSingleWalk(Request $request)
@@ -27,9 +31,13 @@ class ApiController extends Controller
         return response()->json(Walk::where('locatie', $request->walkLocatie)->first());
     }
 
-    public function getHoreca() 
+    public function getCatering() 
     {
-        return response()->json(Horeca::where('status', "Actief")->get());
+        return response()->json([
+            "catering" => Catering::where('status', "Active")->get(),
+            "walks" => Walk::all(),
+            "locations" => Location::all()
+        ]);
     }
 
     public function getFaqs()
@@ -44,16 +52,16 @@ class ApiController extends Controller
 
     public function sendContactForm(Request $request) 
     {
-        Mail::to('larsvanderniet@gmail.com')->send(new sendContactForm($request->naam, $request->email, $request->bericht));
+        Mail::to('larsvanderniet@gmail.com')->send(new sendContactForm($request->name, $request->email, $request->message));
         return response()->json(200);
     }
 
     public function checkUniekeCode(Request $request)
     {
         
-        if ($boeking = Boeking::where('unieke_code', $request->code)->first()) {
-            if ($boeking->walk->locatie === $request->walk) {
-                if ($boeking->status === "Betaald") {
+        if ($booking = Booking::where('unieke_code', $request->code)->first()) {
+            if ($booking->walk->locatie === $request->walk) {
+                if ($booking->status === "Betaald") {
                     return response()->json(['status', 'success'], 200);
                 }
                 return response()->json(['status', 'failed'], 401);
@@ -109,7 +117,7 @@ class ApiController extends Controller
         $kortingscode = $walk->kortingscode . '-' . $request->aantalPersonen . $customer->id;
 
         // Aanmaken boeking
-        $boeking = Boeking::create([
+        $booking = Booking::create([
             'datum' => DateTime::createFromFormat('Y-m-d', $request->datum),
             'kortingscode' => $kortingscode,
             'personen' => $request->aantalPersonen,
@@ -124,7 +132,7 @@ class ApiController extends Controller
             'success_url' => env("FRONTEND_APP_URL", "https://beta.dinnerwalks.nl").'?betaald=success',
             'cancel_url' => env("FRONTEND_APP_URL", "https://beta.dinnerwalks.nl").'?betaald=failure',
             'payment_method_types' => ['ideal'],
-            'client_reference_id' => $boeking->id,
+            'client_reference_id' => $booking->id,
             'customer_email' => $customer->email,
             'mode' => 'payment',
             'locale' => 'nl',

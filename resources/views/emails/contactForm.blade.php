@@ -1,9 +1,9 @@
 @component('mail::message')
-Een bericht van **{{ $naam }}**
+Een bericht van **{{ $name }}**
 
 
 **E-mail**: {{ $email }} <br>
-**Bericht**: {{ $bericht }}
+**Bericht**: {{ $message }}
 
 
 Met vriendelijke groet,<br>

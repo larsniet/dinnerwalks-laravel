@@ -21,7 +21,7 @@ use App\Http\Controllers\ApiController;
     Route::get('walks', [ApiController::class, 'getWalks']);
     Route::post('walk', [ApiController::class, 'getSingleWalk']);
     Route::get('faqs', [ApiController::class, 'getFaqs']);
-    Route::get('horeca', [ApiController::class, 'getHoreca']);
+    Route::get('catering', [ApiController::class, 'getCatering']);
     
     Route::post('contactForm', [ApiController::class, 'sendContactForm']);
     Route::post('checkUniekeCode', [ApiController::class, 'checkUniekeCode']);
