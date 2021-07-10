@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('set:boekingenInactive')->dailyAt('16:28');
+        $schedule->command('set:boekingenInactive')->dailyAt('23:59');
     }
 
     /**

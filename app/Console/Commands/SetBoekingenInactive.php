@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\Boeking;
+use App\Models\Booking;
 
 class SetBoekingenInactive extends Command
 {
@@ -39,7 +39,7 @@ class SetBoekingenInactive extends Command
     public function handle()
     {
         // Haal alle boekingen op van afgelopen 2 dagen
-        $boekingen = Boeking::whereBetween('datum', 
+        $boekingen = Booking::whereBetween('date', 
         [
             date('Y-m-d', strtotime("-2 days")),
             date('Y-m-d')
