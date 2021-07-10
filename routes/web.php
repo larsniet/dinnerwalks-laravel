@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckIfAdmin;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\QrecaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     // Ook toegankelijk voor Horeca
     Route::view('dashboard', 'dashboard')->name('dashboard');
-    Route::post('linkQreca', [QrecaController::class, 'linkQreca'])->name('linkQreca');
+    Route::post('getLinkToQreca', [QrecaController::class, 'getLinkToQreca'])->name('getLinkToQreca');
 
     // Niet toegankelijk voor Horeca
     Route::group(['middleware' => CheckIfAdmin::class], function () {

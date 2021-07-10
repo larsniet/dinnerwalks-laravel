@@ -18,7 +18,7 @@ class UserRoleSeeder extends Seeder
     {
         $users = User::all();
         for ($i=0; $i < count($users); $i++) { 
-            if ($users[$i]->email !== 'admin@dinnerwalks.nl') {
+            if (($users[$i]->email !== 'admin@dinnerwalks.nl')) {
                 DB::table('user_roles')->insert([
                     'user_id' => $users[$i]->id,
                     'role_id' => Role::where('name', 'catering')->first()->id

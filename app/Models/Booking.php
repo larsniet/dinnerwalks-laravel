@@ -27,15 +27,21 @@ class Booking extends Model
      * @var array
      */
     protected $fillable = [
-        'datum', 'kortingscode', 'locatie', 'unieke_code', 'personen', 'prijs_boeking', 'walk_id', 'customer_id'
+        'walk_id', 
+        'customer_id', 
+        'date', 
+        'unique_code', 
+        'discount_code', 
+        'amount_persons', 
+        'price',
+        'status'
     ];
 
     protected $searchable = [
-        'kortingscode',
-        'unieke_code',
-        'datum',
-        'locatie', 
-        'personen'
+        'discount_code',
+        'unique_code',
+        'date',
+        'amount_persons'
     ];
 
     public function customer() 

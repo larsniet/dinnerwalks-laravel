@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\QrecaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ use App\Http\Controllers\ApiController;
     Route::post('walk', [ApiController::class, 'getSingleWalk']);
     Route::get('faqs', [ApiController::class, 'getFaqs']);
     Route::get('catering', [ApiController::class, 'getCatering']);
+
+
+    Route::post('koppeling/getUserData', [QrecaController::class, 'getUserData']);
     
     Route::post('contactForm', [ApiController::class, 'sendContactForm']);
     Route::post('checkUniekeCode', [ApiController::class, 'checkUniekeCode']);

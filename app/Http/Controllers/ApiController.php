@@ -13,6 +13,7 @@ use App\Models\Walk;
 use App\Models\Faq;
 use App\Models\DiscountCode;
 use App\Models\Catering;
+use App\Models\Podcast;
 use DateTime;
 use Mail;
 
@@ -28,7 +29,20 @@ class ApiController extends Controller
 
     public function getSingleWalk(Request $request)
     {
-        return response()->json(Walk::where('locatie', $request->walkLocatie)->first());
+        $booking = Booking::where('unique_code', $request->uniqueCode)->first();
+        $walk = Walk::where('id', $booking->walk_id)->first();
+        $pdf = $walk->pdf;
+
+        $podcasts = Podcast::where('walk_id', $walk->id)->get();
+        if ($podcasts->isEmpty()) {
+            $podcasts = null;
+        }
+
+        return response()->json([            
+            'podcasts' => $podcasts,
+            'location' => $walk->location->name,
+            'pdf' => $pdf
+        ]);
     }
 
     public function getCatering() 
@@ -58,8 +72,8 @@ class ApiController extends Controller
 
     public function checkUniekeCode(Request $request)
     {
-        if ($booking = Booking::where('unieke_code', $request->code)->first()) {
-            if ($booking->walk->locatie === $request->walk) {
+        if ($booking = Booking::where('unique_code', $request->code)->first()) {
+            if ($booking->walk->location->name === $request->location) {
                 if ($booking->status === "Betaald") {
                     return response()->json(['status', 'success'], 200);
                 }
@@ -88,7 +102,6 @@ class ApiController extends Controller
                 'errors' => $validator->errors()
             ], 400);
         }
-        
 
         // Setup voor Stripe Checkout
         \Stripe\Stripe::setApiKey('sk_test_51ISUAIEK50IisyE6xV7UFnL11Z05NSIpVhWQGf0JaVZ22RplwxNAq1nJtH3sPHpo7ZwOMvT8BKafgUZKJz0D3WF900YtacdP5F');
@@ -97,33 +110,33 @@ class ApiController extends Controller
                 'price_data' => [
                     'currency' => 'eur',
                     'product_data' => [
-                        'name' => $walk->locatie,
+                        'name' => $walk->name,
                         'images' => ["https://admin.dinnerwalks.nl/$walk->preview"],
                     ],
-                    'unit_amount' => $walk->prijs * 100,
+                    'unit_amount' => $walk->price * 100,
                 ],
                 'quantity' => $request->aantalPersonen,
         );
 
         // Aanmaken klant
         $customer = Customer::create([
-            'naam' => $request->naam,
-            'telefoonnummer' => $request->telefoonnummer,
+            'name' => $request->naam,
+            'phone' => $request->telefoonnummer,
             'email' => $request->email
         ]);
 
         // Aanmaken van kortingscode gebaseerd op aantal personen en customer id
-        $kortingscode = $walk->kortingscode . '-' . $request->aantalPersonen . $customer->id;
+        $kortingscode = $walk->discountCode->code . '-' . $walk->id . $customer->id;
 
         // Aanmaken boeking
         $booking = Booking::create([
-            'datum' => DateTime::createFromFormat('Y-m-d', $request->datum),
-            'kortingscode' => $kortingscode,
-            'personen' => $request->aantalPersonen,
-            'unieke_code' => $this->generateRandomString(12),
-            'prijs_boeking' => floatval($request->prijs),
             'walk_id' => $walk->id,
-            'customer_id' => $customer->id
+            'customer_id' => $customer->id,
+            'date' => DateTime::createFromFormat('Y-m-d', $request->datum),
+            'unique_code' => $this->generateRandomString(12),
+            'discount_code' => $kortingscode,
+            'amount_persons' => $request->aantalPersonen,
+            'price' => floatval($request->prijs),
         ]);
 
         // Stripe sessie aanmaken en terug sturen naar de frontend
@@ -148,16 +161,4 @@ class ApiController extends Controller
         }
         return $randomString;
     }
-
-    // public function sendData(Request $request)
-    // {
-    //     $user = Auth::user();
-    //     $catering = $user->catering;
-    //     $client = new Client;
-    //     $response = $client->post('https://somewhere.com/api/thing', ['user_details' => $user, 'catering' => $catering]);
-    // }
-    // public function retrieveData(Request $request)
-    // {
-    //     $request->user_details->email;
-    // }
 }

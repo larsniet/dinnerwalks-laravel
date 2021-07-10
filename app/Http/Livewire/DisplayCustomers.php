@@ -7,7 +7,7 @@ use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Walk;
 use App\Models\Booking;
-use App\Models\Horeca;
+use App\Models\Catering;
 use Auth;
 use Date;
 
@@ -17,7 +17,7 @@ class DisplayCustomers extends Component
 
     public function render()
     {
-        if (Auth::user()->email === "admin@dinnerwalks.nl") {
+        if (Auth::user()->roles[0]->name === 'admin') {
             sleep(1);
             $customers = Customer::where('id', '!=', NULL)->paginate(20);
 
@@ -28,16 +28,16 @@ class DisplayCustomers extends Component
             return view('livewire.display-customers', ['customers' => $customers]);
         }
 
-        $horecaOnderneming = Horeca::where('id', Auth::user()->id)->first();
-        $walk = Walk::where('id', $horecaOnderneming->walk_id)->first();
-        $boekingen = Booking::whereBetween('date', [
+        $catering = Catering::where('user_id', Auth::user()->id)->first();
+        $location = $catering->location;
+        $bookings = Booking::whereBetween('date', [
             date('Y-m-d'),
             date('Y-m-d', strtotime("+1 week"))])->get();
-        $boekingen = $boekingen->where('walk_id', $walk->id);
-        $boekingen = $boekingen->where('status', "Betaald")->sortBy('date');
+        $bookings = $bookings->where('locatie', $location->name);
+        $bookings = $bookings->where('status', "Betaald")->sortBy('date');
         
         return view('livewire.display-customers', [
-            'customers' => $boekingen,
+            'customers' => $bookings,
         ]);
 
     }

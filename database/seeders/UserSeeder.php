@@ -23,5 +23,12 @@ class UserSeeder extends Seeder
             'password' => Hash::make("dinnerpass"),
             'remember_token' => Str::random(10),
         ]);
+        DB::table('users')->insert([
+            'name' => 'Ard Kokkelkoren',
+            'email' => "ard@qreca.nl",
+            'email_verified_at' => now(),
+            'password' => Hash::make("password"),
+            'remember_token' => Str::random(10),
+        ]);
     }
 }

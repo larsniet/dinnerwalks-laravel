@@ -19,7 +19,7 @@ class CateringSeeder extends Seeder
     {
         DB::table('caterings')->insert([
             'location_id' => Location::where('name', 'Leiden')->first()->id,
-            'user_id' => User::all()->random()->id,
+            'user_id' => User::where('email', 'ard@qreca.nl')->first()->id,
             'name' => "Grand Café Van Buuren",
             'logo' => "storage/horeca_images/vanbuuren.jpg",
             "address" => "Stationsweg 7",

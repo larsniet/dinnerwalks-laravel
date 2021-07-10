@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Spatie\WebhookClient\Models\WebhookCall;
 use Illuminate\Support\Facades\Log;
 use App\Mail\sendBoekingDetails;
-use App\Models\Boeking;
+use App\Models\Booking;
 use App\Models\Walk;
 use Mail;
 
@@ -31,29 +31,30 @@ class ChargeCustomer implements ShouldQueue
     public function handle()
     {
         // Get boeking en status van payment
-        $boeking = Boeking::where('id', $this->webhookCall->payload['data']['object']['client_reference_id'])->first();
+        $booking = Booking::where('id', $this->webhookCall->payload['data']['object']['client_reference_id'])->first();
         $payment_status = $this->webhookCall->payload['data']['object']['payment_status'];
 
         if ($payment_status === "paid") {
 
             // Payment success
-            $boeking->status = "Betaald";
-            $boeking->save();
+            $booking->status = "Betaald";
+            $booking->save();
 
-            $walk = Walk::where('id', $boeking->walk_id)->first();
-            $walk->omzet += $boeking->prijs_boeking;
-            $walk->aantal_geboekt = $walk->aantal_geboekt + 1;
+            $walk = Walk::where('id', $booking->walk_id)->first();
+            $walk->revenue += $booking->price;
+            $walk->amount_booked = $walk->amount_booked + 1;
             $walk->save();
 
-            $url = env("FRONTEND_APP_URL", "https://beta.dinnerwalks.nl")."/walks/$walk->locatie?code=$boeking->unieke_code";
+            $locationName = $walk->location->name;
+            $url = env("FRONTEND_APP_URL", "https://beta.dinnerwalks.nl")."/walks/$locationName?code=$booking->unique_code";
             
-            Mail::to($boeking->customer->email)->send(new sendBoekingDetails($boeking->customer->naam, $boeking->customer->email, $boeking->datum, $boeking->kortingscode, $boeking->personen, $boeking->prijs, $url, $walk->locatie));
+            Mail::to($booking->customer->email)->send(new sendBoekingDetails($booking->customer->name, $booking->customer->email, $booking->date, $booking->discount_code, $booking->amount_persons, $booking->price, $url, $walk->location->name));
 
         } else {
             
             // Payment failed
-            $boeking->status = "Afgebroken";
-            $boeking->save();
+            $booking->status = "Afgebroken";
+            $booking->save();
 
         }
     }

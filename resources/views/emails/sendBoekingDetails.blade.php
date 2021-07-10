@@ -1,7 +1,7 @@
 @component('mail::message')
 <h2>Hi wandelaar!</h2>
 
-<p>Hopelijk heb je een beetje zin in de wandeling, horeca <span style="text-transform: capitalize">{{ substr($plaats, 0, strpos($plaats, " Cocktail")); }}</span> kan in ieder geval niet wachten om jou te ontvangen! De wandeling die je hebt geboekt vindt plaats op {{ $datum }} en is voor {{ $personen }}
+<p>Hopelijk heb je een beetje zin in de wandeling, horeca <span style="text-transform: capitalize">{{ $plaats }}</span> kan in ieder geval niet wachten om jou te ontvangen! De wandeling die je hebt geboekt vindt plaats op {{ $datum }} en is voor {{ $personen }}
 @if ($personen === 1)
 persoon.
 @else

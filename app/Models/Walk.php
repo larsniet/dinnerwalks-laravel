@@ -29,6 +29,7 @@ class Walk extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'name', 
         'description', 
         'location_id',
