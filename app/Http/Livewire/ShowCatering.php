@@ -20,7 +20,6 @@ class ShowCatering extends Component
 
     protected $rules = [
         'caterings.*.name' => 'required',
-        'caterings.*.email' => 'required',
         'caterings.*.address' => 'required',
         'caterings.*.location_id' => 'required',
         'caterings.*.status' => 'required'
@@ -62,7 +61,6 @@ class ShowCatering extends Component
         $catering = $this->caterings->toArray()[$cateringIndex] ?? NULL;
         if (!is_null($catering)) {
             $editedCatering = Catering::find($catering['id']);
-            dd($editedCatering);
             if ($editedCatering) {
                 $editedCatering->update($catering);
                 if ($this->logo) {
