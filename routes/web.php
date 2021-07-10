@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     // Ook toegankelijk voor Horeca
     Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::post('linkQreca', [QrecaController::class, 'linkQreca'])->name('linkQreca');
 
     // Niet toegankelijk voor Horeca
     Route::group(['middleware' => CheckIfAdmin::class], function () {

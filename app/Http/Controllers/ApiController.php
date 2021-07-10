@@ -58,7 +58,6 @@ class ApiController extends Controller
 
     public function checkUniekeCode(Request $request)
     {
-        
         if ($booking = Booking::where('unieke_code', $request->code)->first()) {
             if ($booking->walk->locatie === $request->walk) {
                 if ($booking->status === "Betaald") {
