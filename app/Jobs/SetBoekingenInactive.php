@@ -32,7 +32,7 @@ class SetBoekingenInactive implements ShouldQueue
     public function handle()
     {
         // Haal alle boekingen op van afgelopen 2 dagen
-        $boekingen = Boeking::whereBetween('datum', 
+        $boekingen = Booking::whereBetween('datum', 
             [
                 date('Y-m-d', strtotime("-2 days")),
                 date('Y-m-d')
