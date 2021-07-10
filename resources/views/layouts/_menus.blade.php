@@ -19,7 +19,7 @@
         @if (Auth::user()->email === 'admin@dinnerwalks.nl')
             <li class="relative px-6 py-3">
                 {!! request()->routeIs('locations') ? '<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>' : '' !!}
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 {{ request()->routeIs('walk') ? 'text-gray-800 dark:text-gray-200' : '' }}"
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 {{ request()->routeIs('locations') ? 'text-gray-800 dark:text-gray-200' : '' }}"
                     href="{{ route('locations') }}">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -45,7 +45,7 @@
             </li>
             <li class="relative px-6 py-3">
                 {!! request()->routeIs('catering') ? '<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>' : '' !!}
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 {{ request()->routeIs('horeca') ? 'text-gray-800 dark:text-gray-200' : '' }}"
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 {{ request()->routeIs('catering') ? 'text-gray-800 dark:text-gray-200' : '' }}"
                     href="{{ route('catering') }}">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">

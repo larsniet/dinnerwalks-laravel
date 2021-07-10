@@ -15,6 +15,16 @@ class DisplayCustomers extends Component
 {
     public $term = "";
 
+    public function toggleStatus(Customer $customer)
+    {
+        if ($customer->booking->status === "Betaald") {
+            $customer->booking->status = "Afgebroken";
+        } else if ($customer->booking->status === "Afgebroken") {
+            $customer->booking->status = "Betaald";
+        }
+        $customer->booking->save();
+    }
+
     public function render()
     {
         if (Auth::user()->roles[0]->name === 'admin') {
@@ -25,7 +35,9 @@ class DisplayCustomers extends Component
                 $customers = Customer::search($this->term)->paginate(20);
             }
 
-            return view('livewire.display-customers', ['customers' => $customers]);
+            return view('livewire.display-customers', [
+                'customers' => $customers
+            ]);
         }
 
         $catering = Catering::where('user_id', Auth::user()->id)->first();

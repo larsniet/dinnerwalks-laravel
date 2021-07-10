@@ -73,7 +73,7 @@ class AddWalk extends Component
                 $podcast = $pod->store('public/walks/'. $walk->location->name . $walk->name.'/podcasts');
                 Podcast::create([
                     'walk_id' => $walk->id, 
-                    'stored_location' => 'storage/walks/' . $walk->location->name . $walk->name . '/podcasts/' . $podcast
+                    'stored_location' => str_replace('public/', 'storage/', $podcast)
                 ]);
             }
         }

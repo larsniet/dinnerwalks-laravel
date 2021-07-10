@@ -110,7 +110,7 @@ class ApiController extends Controller
                 'price_data' => [
                     'currency' => 'eur',
                     'product_data' => [
-                        'name' => $walk->name,
+                        'name' => ucfirst($walk->name)." walk in ".ucfirst($walk->location->name),
                         'images' => ["https://admin.dinnerwalks.nl/$walk->preview"],
                     ],
                     'unit_amount' => $walk->price * 100,

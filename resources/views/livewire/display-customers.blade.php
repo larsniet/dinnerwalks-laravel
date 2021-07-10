@@ -54,8 +54,8 @@
                                                 <div>
                                                     <p>
                                                         <span
-                                                            class="font-semibold">{{ $customer->booking->walk->name }}</span>
-                                                        in {{ $customer->booking->walk->location->name }}
+                                                            class="font-semibold">{{ ucfirst($customer->booking->walk->name) }}</span>
+                                                        in {{ ucfirst($customer->booking->walk->location->name) }}
                                                     </p>
                                                     <p class="text-xs text-gray-600 dark:text-gray-400">
                                                         {{ $customer->booking->discount_code }}
@@ -72,15 +72,19 @@
                                         </td>
                                         <td class="px-4 py-3 text-xs">
                                             @if ($customer->booking->status === 'Betaald')
-                                                <span
-                                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                                    {{ $customer->booking->status }}
-                                                </span>
+                                                <a style="cursor: pointer" wire:click.prevent='toggleStatus({{ $customer }})'>
+                                                    <span
+                                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                                        {{ $customer->booking->status }}
+                                                    </span>
+                                                </a>
                                             @else
-                                                <span
-                                                    class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-full dark:bg-red-700 dark:text-red-100">
-                                                    {{ $customer->booking->status }}
-                                                </span>
+                                                <a style="cursor: pointer" wire:click.prevent='toggleStatus({{ $customer }})'>
+                                                    <span
+                                                        class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-full dark:bg-red-700 dark:text-red-100">
+                                                        {{ $customer->booking->status }}
+                                                    </span>
+                                                </a>
                                             @endif
                                         </td>
                                         <td class="px-4 py-3 text-sm">
@@ -111,8 +115,9 @@
                                             <td class="px-4 py-3">
                                                 <div class="flex items-center text-sm">
                                                     <div>
-                                                        <p class="font-semibold">
-                                                            {{ $customer->booking->walk->location->name }}</p>
+                                                        <span
+                                                        class="font-semibold">{{ ucfirst($customer->booking->walk->name) }}</span>
+                                                    in {{ ucfirst($customer->booking->walk->location->name) }}
                                                         <p class="text-xs text-gray-600 dark:text-gray-400">
                                                             {{ $customer->booking->discount_code }}
                                                         </p>
@@ -128,19 +133,23 @@
                                             </td>
                                             <td class="px-4 py-3 text-xs">
                                                 @if ($customer->booking->status === 'Betaald')
-                                                    <span
-                                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                                        {{ $customer->booking->status }}
-                                                    </span>
+                                                    <a style="cursor: pointer" wire:click.prevent='toggleStatus({{ $customer }})'>
+                                                        <span
+                                                            class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                                            {{ $customer->booking->status }}
+                                                        </span>
+                                                    </a>
                                                 @else
-                                                    <span
-                                                        class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-full dark:bg-red-700 dark:text-red-100">
-                                                        {{ $customer->booking->status }}
-                                                    </span>
+                                                    <a style="cursor: pointer" wire:click.prevent='toggleStatus({{ $customer }})'>
+                                                        <span
+                                                            class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-full dark:bg-red-700 dark:text-red-100">
+                                                            {{ $customer->booking->status }}
+                                                        </span>
+                                                    </a>
                                                 @endif
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $customer->booking->datum }}
+                                                {{ $customer->booking->date }}
                                             </td>
                                         </tr>
                                     @endforeach
